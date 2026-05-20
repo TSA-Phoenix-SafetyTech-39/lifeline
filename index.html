@@ -18,6 +18,7 @@
             --code-text: #ff7b72;
             --toggle-bg: #21262d;
             --toggle-text: #ffffff;
+            --copy-success: #3fb950;
         }
 
         /* Light Theme Overrides */
@@ -33,38 +34,39 @@
             --code-text: #d73a49;
             --toggle-bg: #f6f8fa;
             --toggle-text: #24292e;
+            --copy-success: #2da44e;
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
             background-color: var(--bg-color);
             color: var(--text-color);
-            line-height: 1.6;
+            font-size: 14px;
+            line-height: 1.5;
             margin: 0;
-            padding: 20px;
+            padding: 16px;
             display: flex;
             justify-content: center;
             transition: background-color 0.3s, color 0.3s;
         }
 
         .container {
-            max-width: 760px;
+            max-width: 720px;
             width: 100%;
             position: relative;
         }
 
-        /* Interactive Theme Button Styling */
         .theme-toggle-btn {
             position: absolute;
-            top: 5px;
+            top: 0;
             right: 0;
             background-color: var(--toggle-bg);
             color: var(--toggle-text);
             border: 1px solid var(--border-color);
-            padding: 8px 12px;
+            padding: 4px 8px;
             border-radius: 6px;
             cursor: pointer;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 500;
             transition: background-color 0.2s;
         }
@@ -76,24 +78,32 @@
         h1, h2, h3 {
             color: var(--header-text);
             font-weight: 600;
+            margin-top: 16px;
+            margin-bottom: 8px;
         }
 
         h1 {
-            font-size: 2.25rem;
+            font-size: 1.5rem;
             border-bottom: 1px solid var(--border-color);
-            padding-bottom: 10px;
+            padding-bottom: 6px;
             margin-top: 0;
-            padding-right: 100px; /* Leave space for button on mobile */
+            padding-right: 100px;
         }
 
         h2 {
-            font-size: 1.5rem;
-            margin-top: 30px;
+            font-size: 1.15rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 4px;
         }
 
         h3 {
-            font-size: 1.1rem;
-            margin-bottom: 5px;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 12px;
         }
 
         a {
@@ -107,53 +117,88 @@
 
         blockquote {
             background-color: var(--quote-bg);
-            border-left: 4px solid var(--accent-color);
-            margin: 20px 0;
-            padding: 15px;
-            border-radius: 0 6px 6px 0;
+            border-left: 3px solid var(--accent-color);
+            margin: 12px 0;
+            padding: 10px 12px;
+            border-radius: 0 4px 4px 0;
         }
 
         blockquote p {
             margin: 0;
             font-style: italic;
             color: var(--header-text);
-            font-size: 1.1rem;
+            font-size: 0.95rem;
         }
 
         hr {
             border: 0;
             border-top: 1px solid var(--border-color);
-            margin: 30px 0;
+            margin: 20px 0;
         }
 
         ul {
-            padding-left: 20px;
+            padding-left: 18px;
+            margin-top: 0;
+            margin-bottom: 12px;
         }
 
         li {
-            margin-bottom: 10px;
+            margin-bottom: 4px;
         }
 
         code {
             background-color: var(--code-bg);
-            padding: 3px 6px;
-            border-radius: 4px;
+            padding: 2px 4px;
+            border-radius: 3px;
             font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--code-text);
         }
 
+        /* Interactive Copy Elements */
+        .copyable-code {
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            user-select: all;
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .copyable-code:hover {
+            opacity: 0.85;
+        }
+
+        .copy-toast {
+            display: inline-block;
+            font-size: 0.75rem;
+            color: var(--copy-success);
+            font-weight: 600;
+            margin-left: 6px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .copy-toast.visible {
+            opacity: 1;
+        }
+
         .cheatsheet-step {
-            margin-bottom: 15px;
-            padding-left: 10px;
+            margin-bottom: 8px;
+            padding-left: 8px;
             border-left: 2px solid var(--border-color);
+        }
+        
+        .cheatsheet-step p {
+            margin-bottom: 4px;
         }
 
         @media (max-width: 550px) {
             .theme-toggle-btn {
                 position: static;
                 display: block;
-                margin-bottom: 15px;
+                margin-bottom: 12px;
                 width: 100%;
                 text-align: center;
             }
@@ -164,7 +209,6 @@
 <body>
 
 <div class="container">
-    <!-- Theme Switcher Button -->
     <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle dark and light mode">☀️ Light Mode</button>
 
     <h1>LifeLine 🛡️</h1>
@@ -181,19 +225,22 @@
 
     <h2>🔗 Project Links</h2>
 
-    <h3 style="display: inline;">📱 Live app</h3> &emsp;👉 <a href="https://github.io" target="_blank" rel="noopener noreferrer">anthonyosakwe.github.io/lifeline/lifelineapp/</a>
-    <br><br>
-
-    <h3 style="display: inline;">📐 Wireframes (lo-fi)</h3> &emsp;👉 <a href="https://github.io" target="_blank" rel="noopener noreferrer">anthonyosakwe.github.io/lifeline/wireframes/</a>
-    <br><br>
-
-    <h3 style="display: inline;">📁 Supporting documents</h3> &emsp;PRD, research, design files &emsp; → <a href="https://google.com" target="_blank" rel="noopener noreferrer">Google Drive folder</a>
-    <br><br>
-
-    <h3 style="display: inline;">📄 Build documentation</h3> &emsp;<a href="https://github.io" target="_blank" rel="noopener noreferrer">anthonyosakwe.github.io/lifeline/lifeline-build-docs/</a>
-    <br><br>
-
-    <hr />
+    <p>
+        <strong style="display: inline-block; width: 140px;">📱 Live app:</strong> 
+        <a href="https://github.io" target="_blank" rel="noopener noreferrer">anthonyosakwe.github.io/lifeline/lifelineapp/</a>
+    </p>
+    <p>
+        <strong style="display: inline-block; width: 140px;">📐 Wireframes (lo-fi):</strong> 
+        <a href="https://github.io" target="_blank" rel="noopener noreferrer">anthonyosakwe.github.io/lifeline/wireframes/</a>
+    </p>
+    <p>
+        <strong style="display: inline-block; width: 140px;">📁 Supporting docs:</strong> 
+        <span>PRD, research, design files &rarr; </span><a href="https://google.com" target="_blank" rel="noopener noreferrer">Google Drive folder</a>
+    </p>
+    <p>
+        <strong style="display: inline-block; width: 140px;">📄 Build docs:</strong> 
+        <a href="https://github.io" target="_blank" rel="noopener noreferrer">anthonyosakwe.github.io/lifeline/lifeline-build-docs/</a>
+    </p>
 
     <h2>🎯 The Problem</h2>
 
@@ -201,37 +248,32 @@
 
     <p><strong>Target user:</strong> Ada, 28, project manager in Lagos. Takes Bolt rides home after late meetings. Has two trusted contacts (sister + close friend).</p>
 
-    <hr />
-
     <h2>🚀 Demo Cheatsheet (for judges)</h2>
 
     <p>Open the <a href="https://github.io" target="_blank" rel="noopener noreferrer">live app</a> on a phone, then:</p>
 
     <div class="cheatsheet-step">
-        <p><strong>Tap Get started</strong><br />Walk through onboarding</p>
+        <p><strong>Tap Get started</strong> &bull; Walk through onboarding</p>
     </div>
 
     <div class="cheatsheet-step">
-        <p><strong>OTP code</strong><br />Use <code>8484</code> (any other code triggers the failure path)</p>
+        <p><strong>OTP code</strong> &bull; Use <code class="copyable-code" id="otpCode" title="Click to copy">8484</code> <span class="copy-toast" id="copyToast">✓ Copied!</span></p>
     </div>
 
     <div class="cheatsheet-step">
-        <p><strong>Home screen</strong><br />Hold the red <strong>SOS</strong> button for 3 seconds → emergency activates</p>
+        <p><strong>Home screen</strong> &bull; Hold the red <strong>SOS</strong> button for 3 seconds &rarr; emergency activates</p>
     </div>
 
     <div class="cheatsheet-step">
-        <p><strong>Start safe arrival card</strong><br />Tap <strong>Allow</strong> on the GPS banner → real OpenStreetMap loads with your live location</p>
+        <p><strong>Start safe arrival card</strong> &bull; Tap <strong>Allow</strong> on the GPS banner &rarr; real OpenStreetMap loads with live location</p>
     </div>
 
     <div class="cheatsheet-step">
-        <p><strong>Bottom demo nav</strong><br />Jump instantly between flows: 🔑 Onboard · 🏠 Safe Arrival · 🚨 SOS · ⚠️ Failures</p>
+        <p><strong>Bottom demo nav</strong> &bull; Jump instantly between flows: 🔑 Onboard · 🏠 Safe Arrival · 🚨 SOS · ⚠️ Failures</p>
     </div>
 
-    <p><strong>Three failure paths to demo:</strong> wrong OTP code · location permission denied · trip ETA overdue</p>
-
-    <p><strong>Two delighters:</strong> confetti on safe arrival · shake-to-SOS hint</p>
-
-    <hr />
+    <p style="margin-top: 12px;"><strong>Three failure paths to demo:</strong> wrong OTP code &bull; location permission denied &bull; trip ETA overdue</p>
+    <p><strong>Two delighters:</strong> confetti on safe arrival &bull; shake-to-SOS hint</p>
 
     <h2>🛠️ Tech Highlights</h2>
 
@@ -245,24 +287,17 @@
         <li>No build step. No dependencies. No backend (yet — V2 will wire to Supabase like SafeSignal).</li>
     </ul>
 
-    <hr />
-
     <h2>👥 Group 39</h2>
-
     <p>Built with ☕ + ⚡ over 4 weeks.</p>
 
-    <hr />
-
-    <p style="font-style: italic; font-size: 0.9rem; color: #8b949e;">If you have access issues with the Drive folder, contact the team — link sharing is set to "Anyone with the link · Viewer."</p>
-
+    <p style="font-style: italic; font-size: 0.8rem; color: #8b949e; margin-top: 24px;">If you have access issues with the Drive folder, contact the team — link sharing is set to "Anyone with the link · Viewer."</p>
 </div>
 
-<!-- Theme Switcher Script Functionality -->
 <script>
+    // Theme Switcher Logic
     const toggleBtn = document.getElementById('themeToggle');
     const htmlEl = document.documentElement;
 
-    // Check system or saved preference
     const savedTheme = localStorage.getItem('theme') || 'dark';
     htmlEl.setAttribute('data-theme', savedTheme);
     updateButtonText(savedTheme);
@@ -279,6 +314,21 @@
     function updateButtonText(theme) {
         toggleBtn.textContent = theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
     }
+
+    // Copy to Clipboard Clipboard API Logic
+    const otpEl = document.getElementById('otpCode');
+    const toastEl = document.getElementById('copyToast');
+
+    otpEl.addEventListener('click', () => {
+        navigator.clipboard.writeText(otpEl.textContent.trim()).then(() => {
+            toastEl.classList.add('visible');
+            setTimeout(() => {
+                toastEl.classList.remove('visible');
+            }, 1800);
+        }).catch(err => {
+            console.error('Failed to copy code: ', err);
+        });
+    });
 </script>
 
 </body>
