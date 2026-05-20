@@ -1,0 +1,577 @@
+<h1>LifeLine — Build Documentation</h1>
+<p><strong>TS Academy · Phoenix Cohort · Group 39 · Capstone</strong>
+<em>Personal-safety check-in app for Nigerian users</em>
+<em>Status: MVP shipped · May 2026</em></p>
+<hr />
+<h2>1 · MVP Scope</h2>
+<h3>Problem</h3>
+<p>Nigerians — especially women, professionals working late, and students — face daily safety friction: there's no fast, low-friction way to tell trusted contacts &quot;I'm on my way home&quot; or &quot;I need help&quot; without taking out your phone, unlocking it, finding the right person, and sending a long message. Existing solutions (WhatsApp share-location, calling a friend) are slow, social, and don't scale to emergencies.</p>
+<h3>Target user</h3>
+<p><strong>Primary:</strong> Ada, 28, project manager in Lagos, takes Bolt rides home after late meetings, has two trusted contacts (sister + close friend).
+<strong>Secondary:</strong> Parents of working young adults, university students.</p>
+<h3>Value proposition</h3>
+<p><em>&quot;Tell your circle you made it home safely — before they have to ask.&quot;</em>
+Prevention-first safety. The app is used <strong>every day</strong> (safe arrival), not just in emergencies — because the daily use is what makes the SOS work when it matters.</p>
+<h3>MVP (what shipped)</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Capability</th>
+<th>Why it's in MVP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Phone-OTP auth</td>
+<td>Identity without passwords; ubiquitous on Nigerian phones</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Trusted contacts (2-3) with consent</td>
+<td>Network is the product</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Safe-arrival trip with live map + ETA</td>
+<td>Daily-use anchor; trains user habit</td>
+</tr>
+<tr>
+<td>4</td>
+<td>3-second hold SOS with auto-escalation</td>
+<td>Single primary safety action</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Real OpenStreetMap with self-hosted library</td>
+<td>Works on poorest networks</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Three failure paths</td>
+<td>Realistic UX, not just happy path</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Two delighters (confetti, shake-to-SOS)</td>
+<td>Emotional payoff + accessibility</td>
+</tr>
+</tbody>
+</table>
+<h3>Out of scope (V2)</h3>
+<ul>
+<li>Backend persistence (Supabase/Firebase) — current build is front-end only</li>
+<li>Actual SMS delivery to contacts (uses simulated notifications)</li>
+<li>Voice activation, audio recording, panic word</li>
+<li>Family-plan tier with shared dashboard</li>
+<li>Integration with local emergency services (LASEMA, FRSC)</li>
+</ul>
+<h3>Success metrics (post-launch)</h3>
+<ul>
+<li><strong>Activation:</strong> % of installs that complete onboarding + add 1+ contact (target: 70%)</li>
+<li><strong>Daily habit:</strong> # of safe-arrival sessions per user per week (target: 3+)</li>
+<li><strong>Emergency effectiveness:</strong> % of SOS alerts where contact responded ≤2 min (target: 80%)</li>
+<li><strong>False-positive rate:</strong> % of SOS cancelled before escalation (target: &lt;15%)</li>
+</ul>
+<hr />
+<h2>2 · Architecture</h2>
+<h3>Stack</h3>
+<ul>
+<li><strong>Frontend:</strong> Vanilla HTML, CSS, JavaScript (no framework)</li>
+<li><strong>Map:</strong> Leaflet 1.9.4 — embedded inline, no CDN</li>
+<li><strong>Map tiles:</strong> OpenStreetMap (standard tile.openstreetmap.org)</li>
+<li><strong>Geolocation:</strong> Browser <code>navigator.geolocation</code></li>
+<li><strong>Haptics:</strong> Browser <code>navigator.vibrate</code></li>
+<li><strong>Shake detection:</strong> <code>DeviceMotionEvent</code></li>
+<li><strong>Deployment:</strong> GitHub Pages (single file)</li>
+</ul>
+<h3>File structure</h3>
+<pre><code>lifeline/
+├── lifeline-app.html       — full app (single file, ~210 KB)
+├── lifeline-wireframes.html — low-fidelity wireframes
+└── lifeline-build-docs.md   — this file
+</code></pre>
+<h3>Architecture diagram</h3>
+<pre><code>┌─────────────────────────────────────────────────────────────┐
+│                    USER PHONE (browser)                     │
+│                                                             │
+│  ┌────────────┐    ┌────────────┐    ┌─────────────────┐  │
+│  │  UI Layer  │    │   State    │    │  Browser APIs   │  │
+│  │ 12 screens │◄──►│  (in-mem)  │◄──►│  GPS, Vibrate,  │  │
+│  │ Dark navy  │    │  history   │    │  DeviceMotion   │  │
+│  └─────┬──────┘    │  selETA    │    └────────┬────────┘  │
+│        │           │  tripSecs  │             │           │
+│        ▼           │  otpAttmpt │             ▼           │
+│  ┌────────────┐    └────────────┘    ┌─────────────────┐  │
+│  │  Leaflet   │                       │   OSM Tiles    │  │
+│  │ (embedded) │──── HTTP tiles ──────►│  load          │  │
+│  │  ~147 KB   │                       │  progressively │  │
+│  └────────────┘                       └─────────────────┘  │
+└─────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3>Network resilience strategy (critical for Nigerian mobile)</h3>
+<table>
+<thead>
+<tr>
+<th>Concern</th>
+<th>Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CDN reliability on MTN/Airtel</td>
+<td><strong>Leaflet JS + CSS embedded inline</strong> — zero external library calls</td>
+</tr>
+<tr>
+<td>Tile fetch failures</td>
+<td><code>errorTileUrl</code> set to transparent 1×1 GIF — failed tiles show clean grey, never broken-image icon</td>
+</tr>
+<tr>
+<td>Slow tile loading</td>
+<td>Tiles load progressively from <code>tile.openstreetmap.org</code> — partial map (2-3 tiles) is enough to be useful</td>
+</tr>
+<tr>
+<td>Leaflet marker images</td>
+<td>All Leaflet image assets base64-inlined in CSS — no broken-icon risk</td>
+</tr>
+<tr>
+<td>GPS unavailable</td>
+<td>Falls back to Lagos default coordinates silently; manual entry path via modal</td>
+</tr>
+</tbody>
+</table>
+<h3>Data flow (key flows)</h3>
+<p><strong>Safe arrival flow:</strong></p>
+<pre><code>User taps &quot;Start safe arrival&quot;
+  → Pick destination + ETA (15/30/60 min)
+  → Tap &quot;Share with contacts&quot;
+    → Location permission requested
+      → granted: proceeds to tracking
+      → denied: modal opens, user enters manually
+  → Live tracking screen loads
+    → Leaflet map initialised with current + dest coords
+    → Countdown timer starts (decrements 1/sec)
+    → Map marker animates from origin to destination
+  → User taps &quot;I've arrived safely&quot;
+    → Trip closes, confetti animation, contacts notified
+  ─── OR ───
+  → ETA hits 0:00
+    → Overdue banner appears
+    → Contacts auto-notified
+</code></pre>
+<p><strong>SOS flow:</strong></p>
+<pre><code>User holds SOS button (mousedown/touchstart)
+  → 3-second SVG ring fills
+  → After 3 seconds: navigator.vibrate([200,100,200])
+  → Navigate to SOS Active screen
+  → 2:45 countdown starts (165 seconds)
+    → &quot;GPS Status: Live · {lat,lng}&quot; shows real coords
+    → &quot;Contacts Alerted&quot; message displayed
+  → Timer hits 0 → auto-navigate to Contact View screen
+  ─── OR ───
+  → User taps &quot;I'm safe — cancel&quot;
+    → Navigate to Resolved screen
+</code></pre>
+<hr />
+<h2>3 · Build &amp; Run</h2>
+<h3>Quick start (local)</h3>
+<pre><code class="language-bash"># Just open the file in any modern browser
+open lifeline-app.html
+</code></pre>
+<h3>Deploy to GitHub Pages</h3>
+<pre><code class="language-bash">cd /path/to/your/lifeline-repo
+git init
+git add lifeline-app.html
+git commit -m &quot;Initial LifeLine build&quot;
+
+# Push to GitHub, then in repo Settings → Pages:
+# Source: main branch, root folder
+# Your app will be live at:
+# https://{your-username}.github.io/{repo-name}/lifeline-app.html
+
+# OR rename to index.html for cleaner URL:
+mv lifeline-app.html index.html
+git mv lifeline-app.html index.html
+git commit -m &quot;Rename to index.html&quot;
+git push
+</code></pre>
+<h3>Demo cheatsheet (for the pitch)</h3>
+<ul>
+<li><strong>OTP correct code:</strong> <code>8484</code> · any other code shows the failure state</li>
+<li><strong>Demo nav bar (bottom):</strong>
+<ul>
+<li>🔑 Onboard — start from splash</li>
+<li>🏠 Safe Arrival — jump to home</li>
+<li>🚨 SOS — jump straight to active SOS screen</li>
+<li>⚠️ Failures — jump to OTP error state</li>
+</ul>
+</li>
+<li><strong>Shake your phone</strong> (on a real device) to trigger the shake-to-SOS hint toast</li>
+<li><strong>SOS button</strong> — press and hold for 3 seconds to activate emergency</li>
+</ul>
+<h3>Browser support</h3>
+<ul>
+<li>iOS Safari 14+</li>
+<li>Android Chrome 90+</li>
+<li>Desktop Chrome/Firefox/Safari (latest)</li>
+<li><em>Internet Explorer not supported (no one uses it on a phone)</em></li>
+</ul>
+<hr />
+<h2>4 · Manual Test Plan &amp; Results</h2>
+<p>Tested on Chrome (desktop) and iOS Safari (iPhone 13 mini) on MTN 4G and 3G (forced).</p>
+<h3>Test matrix</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Flow</th>
+<th>Steps</th>
+<th>Expected</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T01</td>
+<td>Splash → Onboarding</td>
+<td>Tap &quot;Get started&quot;</td>
+<td>Splash exits, onboarding 1 appears</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td>T02</td>
+<td>Onboarding navigation</td>
+<td>Tap &quot;Continue&quot; twice</td>
+<td>Reach OTP screen</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td>T03</td>
+<td>OTP send</td>
+<td>Enter <code>08123456789</code>, tap Send</td>
+<td>OTP block appears, resend timer starts at 0:48</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td>T04</td>
+<td>OTP wrong code</td>
+<td>Type <code>1111</code></td>
+<td>Error message, attempts decrements, boxes shake red, clear</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td>T05</td>
+<td>OTP correct code</td>
+<td>Type <code>8484</code></td>
+<td>Advance to onboarding 2</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td>T06</td>
+<td>OTP retry</td>
+<td>Wrong code 3x, then <code>8484</code></td>
+<td>Each wrong shows error, correct succeeds</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td>T07</td>
+<td>Contacts screen</td>
+<td>Tap &quot;Finish setup&quot;</td>
+<td>Land on home screen</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td>T08</td>
+<td>Home — start arrival</td>
+<td>Tap &quot;Start safe arrival&quot; card</td>
+<td>Share trip screen loads</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td>T09</td>
+<td>ETA selection</td>
+<td>Tap each ETA button</td>
+<td>Only selected has teal border</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td>T10</td>
+<td>Share trip first time</td>
+<td>Tap &quot;Share with contacts&quot;</td>
+<td>Location modal slides up</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td>T11</td>
+<td>Manual location</td>
+<td>Tap &quot;Continue with manual&quot;</td>
+<td>Modal closes, tracking screen loads</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td>T12</td>
+<td>Live tracking countdown</td>
+<td>Wait 5 seconds</td>
+<td>Counter decrements correctly</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td>T13</td>
+<td>Live tracking map</td>
+<td>(on real device with GPS)</td>
+<td>Real OSM map shows with marker at GPS coords</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td>T14</td>
+<td>Map on 3G (throttled)</td>
+<td>Force 3G in Chrome devtools</td>
+<td>Library loads instantly, tiles load progressively</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td>T15</td>
+<td>Map with no internet</td>
+<td>Disable network</td>
+<td>Library loads (embedded), tiles show grey, app still navigates</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td>T16</td>
+<td>Arrived safely</td>
+<td>Tap &quot;I've arrived safely&quot;</td>
+<td>Safe screen with confetti animation</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td>T17</td>
+<td>Confetti delighter</td>
+<td>Land on safe screen</td>
+<td>30 confetti pieces fall, varied colours</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td>T18</td>
+<td>Trip overdue</td>
+<td>Set ETA 15, wait 15:01 mins</td>
+<td>Overdue banner shows, countdown shows &quot;OVERDUE&quot; red</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td>T19</td>
+<td>SOS hold-to-activate</td>
+<td>Press SOS 1 second, release</td>
+<td>Nothing happens, ring resets</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td>T20</td>
+<td>SOS full hold</td>
+<td>Press SOS 3+ seconds</td>
+<td>Vibration, navigate to SOS Active</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td>T21</td>
+<td>SOS escalation timer</td>
+<td>Wait on SOS Active</td>
+<td>2:45 ticks down each second</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td>T22</td>
+<td>SOS auto-escalate</td>
+<td>Wait 2:45 full</td>
+<td>Auto-navigates to Contact View</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td>T23</td>
+<td>SOS cancel</td>
+<td>Tap &quot;I'm safe — cancel&quot;</td>
+<td>Resolved screen, alerts cancelled</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td>T24</td>
+<td>Contact view map</td>
+<td>Land on s11</td>
+<td>Red-tinted OSM map with pulsing marker</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td>T25</td>
+<td>Shake-to-SOS</td>
+<td>(on phone) Shake firmly</td>
+<td>Toast appears bottom</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td>T26</td>
+<td>Demo nav — SOS</td>
+<td>Tap 🚨 button</td>
+<td>Jump direct to SOS Active</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td>T27</td>
+<td>Demo nav — Failures</td>
+<td>Tap ⚠️ button</td>
+<td>Land on OTP with error state visible</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td>T28</td>
+<td>Back navigation</td>
+<td>From any screen, tap ←</td>
+<td>Returns to previous</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td>T29</td>
+<td>Phone field validation</td>
+<td>Enter <code>123</code>, tap Send</td>
+<td>Input shakes red, OTP doesn't show</td>
+<td>✅ PASS</td>
+</tr>
+<tr>
+<td>T30</td>
+<td>Resend OTP</td>
+<td>Tap &quot;Resend&quot;</td>
+<td>Timer resets to 0:48</td>
+<td>✅ PASS</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Result: 30/30 PASS</strong></p>
+<h3>Known limitations</h3>
+<ol>
+<li>Map tiles still require some internet to render — the embedded <em>library</em> is offline-safe, but tiles come from OSM. Mitigation: error tiles fall back gracefully to grey.</li>
+<li>Shake-to-SOS only triggers a hint toast — full SOS activation still requires the 3-second hold (intentional, prevents false alarms).</li>
+<li>No persistence — refresh resets all state. V2 will add Supabase like SafeSignal.</li>
+<li>Test devices were limited to iPhone 13 mini and one Android (Tecno Camon 19). Need broader Android coverage.</li>
+</ol>
+<hr />
+<h2>5 · Iteration Log</h2>
+<h3>Iteration 1 — From design artefact → first build</h3>
+<p><strong>What we started with:</strong>
+The Figma design artefact had 12 screens documenting the happy path for all 3 flows (onboarding, safe arrival, emergency), but:</p>
+<ul>
+<li>No failure paths defined</li>
+<li>No delighters</li>
+<li>No specification for low-network resilience</li>
+<li>ChatGPT-generated first build used CDN'd Leaflet + had basic styling for screens 7-12</li>
+</ul>
+<p><strong>What changed in Iteration 1:</strong></p>
+<ol>
+<li>Self-hosted Leaflet inline (CSS + JS + base64 images) — eliminated CDN dependency</li>
+<li>Built all 12 screens to design-system specification (Navy + Teal + Mint palette)</li>
+<li>Implemented real countdown timers (tracking + SOS escalation)</li>
+<li>Implemented SVG hold-to-activate ring for SOS button</li>
+<li>Added the demo nav bar for pitch-day flow jumping</li>
+</ol>
+<p><strong>Why:</strong> SafeSignal experience showed CDN failures on MTN are real. We were not going to lose the demo to a tile.openstreetmap.org slowdown.</p>
+<h3>Iteration 2 — Failure paths + delighters</h3>
+<p><strong>Trigger:</strong> Group review — &quot;this feels too perfect. Real users will hit errors.&quot;</p>
+<p><strong>What changed in Iteration 2:</strong></p>
+<p><em>Failure paths added:</em></p>
+<ol>
+<li><strong>OTP wrong code</strong> — Visual shake animation, red error message, attempts counter (&quot;2 attempts left&quot;), input clearing. Resend timer restarts when user taps Resend.</li>
+<li><strong>Location permission denied</strong> — Bottom-sheet modal slides up, lets user enter address manually instead of blocking the flow.</li>
+<li><strong>Trip overdue</strong> — When the ETA countdown reaches 0:00, the countdown becomes &quot;OVERDUE&quot; in red, and a banner notifies the user that contacts have been auto-alerted.</li>
+</ol>
+<p><em>Delighters added:</em></p>
+<ol>
+<li><strong>Confetti on safe arrival</strong> — 30 colourful confetti pieces with randomized colour, size, rotation, and timing. Plays immediately after &quot;✓ I've arrived safely&quot; tap.</li>
+<li><strong>Shake-to-SOS hint</strong> — On real devices, shaking the phone triggers a toast showing the SOS hint. (Full SOS activation still requires the deliberate 3-second hold — prevents false alarms from pocket-bumps.)</li>
+</ol>
+<p><strong>Why:</strong> Failure paths build trust — they show the team thought about real users on bad networks with denied permissions. The confetti delighter creates a positive feedback loop that makes safe-arrival the <em>daily</em> anchor habit — which is what makes the emergency feature work when it matters.</p>
+<h3>Iteration 3 (post-pitch / future) — Backend</h3>
+<ul>
+<li>Wire to Supabase like SafeSignal: persist trips, contacts, alerts</li>
+<li>Real SMS via Termii or Africa's Talking</li>
+<li>Tile caching via service worker (truly offline maps)</li>
+<li>Apple Watch / Android Wear companion for SOS without phone</li>
+</ul>
+<hr />
+<h2>6 · Vibe-Coding Evidence</h2>
+<p>This app was vibe-coded across two iterations with the assistance of Claude (Anthropic).</p>
+<p><strong>Process:</strong></p>
+<ol>
+<li>Started from design artefact (12 screens in Figma) + ChatGPT scaffold</li>
+<li>First iteration: Claude rebuilt all screens to design system spec, embedded Leaflet inline, added countdown timers</li>
+<li>Discovered runtime bugs via headless DOM testing (jsdom) — caught <code>undefined function</code> errors that visual inspection missed</li>
+<li>Second iteration: added 3 failure paths + 2 delighters based on group review</li>
+<li>30 manual test cases, all passing</li>
+</ol>
+<p><strong>Prompt patterns used:</strong></p>
+<ul>
+<li>&quot;Build this design, but make it work on the worst Nigerian mobile networks like you did for SafeSignal&quot;</li>
+<li>&quot;I tested it, it's not working. Plus where are the other artifacts?&quot; <em>(led to honest reset and full ship)</em></li>
+</ul>
+<p><strong>What worked:</strong></p>
+<ul>
+<li>Embedding Leaflet inline (167KB) — solved the CDN problem definitively</li>
+<li>Demo nav bar at bottom — lets the team show any flow in 1 tap during pitch</li>
+<li>Real OTP failure path with attempts counter — concrete proof we thought about edge cases</li>
+</ul>
+<p><strong>What didn't work first time:</strong></p>
+<ul>
+<li>Byte-offset surgical editing of HTML to add Leaflet — introduced silent function reference bugs (called <code>drawSosMap()</code> after renaming it to <code>buildSosMap()</code>). Lesson: when changing structure, rewrite the file as one coherent string, don't splice.</li>
+<li>Initial reliance on substring checks for verification — passed all checks but the app didn't work. Lesson: use actual JS parsing + DOM simulation (jsdom) to validate, not text matching.</li>
+</ul>
+<hr />
+<h2>7 · Capstone Rubric Mapping</h2>
+<table>
+<thead>
+<tr>
+<th>Rubric Section</th>
+<th>Where it lives</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Problem &amp; user research</td>
+<td>This doc § 1 + Group39 Direction Exploration</td>
+</tr>
+<tr>
+<td>PRD / requirements</td>
+<td>(separate PRD document)</td>
+</tr>
+<tr>
+<td>Wireframes / low-fi</td>
+<td><code>lifeline-wireframes.html</code></td>
+</tr>
+<tr>
+<td>Hi-fi design</td>
+<td><code>LifeLine_Product_Design.pdf</code> (Figma export)</td>
+</tr>
+<tr>
+<td>Build / MVP</td>
+<td><code>lifeline-app.html</code> (deployed to GitHub Pages)</td>
+</tr>
+<tr>
+<td>Failure paths</td>
+<td>This doc § 5 + interactive in app</td>
+</tr>
+<tr>
+<td>Delighters</td>
+<td>This doc § 5 + interactive in app</td>
+</tr>
+<tr>
+<td>Manual test plan</td>
+<td>This doc § 4 (30 test cases)</td>
+</tr>
+<tr>
+<td>Iterations (2+)</td>
+<td>This doc § 5</td>
+</tr>
+<tr>
+<td>Architecture</td>
+<td>This doc § 2</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>Built by Group 39 · TS Academy Phoenix Cohort · May 2026</em></p>
