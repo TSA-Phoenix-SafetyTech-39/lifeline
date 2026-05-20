@@ -19,6 +19,7 @@
             --toggle-bg: #21262d;
             --toggle-text: #ffffff;
             --copy-success: #3fb950;
+            --roadmap-step-bg: #161b22;
         }
 
         /* Light Theme Overrides */
@@ -35,6 +36,7 @@
             --toggle-bg: #f6f8fa;
             --toggle-text: #24292e;
             --copy-success: #2da44e;
+            --roadmap-step-bg: #f6f8fa;
         }
 
         body {
@@ -72,13 +74,13 @@
         }
 
         .theme-toggle-btn:hover {
-            opacity: 0.9;
+            opacity: 0.85;
         }
 
-        h1, h2, h3 {
+        h1, h2, h3, h4 {
             color: var(--header-text);
             font-weight: 600;
-            margin-top: 16px;
+            margin-top: 20px;
             margin-bottom: 8px;
         }
 
@@ -99,6 +101,13 @@
         h3 {
             font-size: 0.95rem;
             margin: 0;
+        }
+
+        h4 {
+            font-size: 0.9rem;
+            margin-top: 10px;
+            margin-bottom: 4px;
+            color: var(--link-color);
         }
 
         p {
@@ -133,7 +142,7 @@
         hr {
             border: 0;
             border-top: 1px solid var(--border-color);
-            margin: 20px 0;
+            margin: 24px 0;
         }
 
         ul {
@@ -155,7 +164,6 @@
             color: var(--code-text);
         }
 
-        /* Interactive Copy Elements */
         .copyable-code {
             border: 1px solid var(--border-color);
             cursor: pointer;
@@ -184,17 +192,41 @@
             opacity: 1;
         }
 
-        .cheatsheet-step {
-            margin-bottom: 8px;
-            padding-left: 8px;
+        .block-step {
+            margin-bottom: 12px;
+            padding-left: 10px;
             border-left: 2px solid var(--border-color);
         }
         
-        .cheatsheet-step p {
+        .block-step p {
             margin-bottom: 4px;
         }
 
-        @media (max-width: 550px) {
+        /* Roadmap Grid UI */
+        .roadmap-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .roadmap-card {
+            background-color: var(--roadmap-step-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 12px;
+        }
+
+        .roadmap-card h4 {
+            margin-top: 0;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 4px;
+        }
+
+        @media (max-width: 600px) {
+            .roadmap-grid {
+                grid-template-columns: 1fr;
+            }
             .theme-toggle-btn {
                 position: static;
                 display: block;
@@ -252,23 +284,23 @@
 
     <p>Open the <a href="https://github.io" target="_blank" rel="noopener noreferrer">live app</a> on a phone, then:</p>
 
-    <div class="cheatsheet-step">
+    <div class="block-step">
         <p><strong>Tap Get started</strong> &bull; Walk through onboarding</p>
     </div>
 
-    <div class="cheatsheet-step">
+    <div class="block-step">
         <p><strong>OTP code</strong> &bull; Use <code class="copyable-code" id="otpCode" title="Click to copy">8484</code> <span class="copy-toast" id="copyToast">✓ Copied!</span></p>
     </div>
 
-    <div class="cheatsheet-step">
+    <div class="block-step">
         <p><strong>Home screen</strong> &bull; Hold the red <strong>SOS</strong> button for 3 seconds &rarr; emergency activates</p>
     </div>
 
-    <div class="cheatsheet-step">
+    <div class="block-step">
         <p><strong>Start safe arrival card</strong> &bull; Tap <strong>Allow</strong> on the GPS banner &rarr; real OpenStreetMap loads with live location</p>
     </div>
 
-    <div class="cheatsheet-step">
+    <div class="block-step">
         <p><strong>Bottom demo nav</strong> &bull; Jump instantly between flows: 🔑 Onboard · 🏠 Safe Arrival · 🚨 SOS · ⚠️ Failures</p>
     </div>
 
@@ -286,6 +318,75 @@
         <li><strong>Shake detection</strong> via DeviceMotion API</li>
         <li>No build step. No dependencies. No backend (yet — V2 will wire to Supabase like SafeSignal).</li>
     </ul>
+
+    <h2>🏗️ Architectural Roadmap (V2 Migration)</h2>
+    <p>To scale from a static prototype to a live infrastructure app without damaging network resilience metrics, V2 executes the following backend migrations:</p>
+
+    <div class="block-step">
+        <h4>1. Low-Overhead Supabase Authentication</h4>
+        <p>Integrate passwordless OTP access via WhatsApp/SMS. If extreme regional congestion limits message transit, the architecture automatically drops to an offline "Guest Mode" powered by cached states in browser <code>localStorage</code>.</p>
+    </div>
+
+    <div class="block-step">
+        <h4>2. Real-Time Emergency Sync Layer</h4>
+        <p>Initialize Supabase PostgreSQL tables to host active travel states. Live tracking events transfer via Supabase WebSockets (Realtime) to tracking portals. Under low-signal 2G operations, data retries cache locally and push incrementally via standard HTTP payloads.</p>
+    </div>
+
+    <div class="block-step">
+        <h4>3. Failover Trigger via Edge Functions</h4>
+        <p>Deploy decoupled TypeScript functions to the Supabase Edge Network. The scripts execute immediately if an active trip ETA passes without a secure termination event, communicating with local SMS gateways (Termii/Twilio) to send distress telemetry via traditional telecom lines.</p>
+    </div>
+
+    <h2>📅 2-Year Strategic Product Roadmap</h2>
+    <p>The progression pathway guiding LifeLine from a Capstone proof-of-concept into an ecosystem web service:</p>
+
+    <h3>Year 1: Infrastructure Foundations & Verification</h3>
+    <div class="roadmap-grid">
+        <div class="roadmap-card">
+            <h4>Year 1 - Q1: Core System Setup</h4>
+            <ul>
+                <li>Deploy data schemas to Supabase Postgres.</li>
+                <li>Configure passwordless WhatsApp auth triggers.</li>
+                <li>Establish background sync fallback scripts.</li>
+            </ul>
+        </div>
+        <div class="roadmap-card">
+            <h4>Year 1 - Q2: Portal & Closed Tests</h4>
+            <ul>
+                <li>Run closed beta trials across core Lagos hubs.</li>
+                <li>Build a read-only tracking view for contacts.</li>
+                <li>Bundle offline map assets into build layers.</li>
+            </ul>
+        </div>
+        <div class="roadmap-card">
+            <h4>Year 1 - Q3: Failover Comms</h4>
+            <ul>
+                <li>Hook up Termii APIs for failover SMS alerts.</li>
+                <li>Launch Edge Functions for automated alert loops.</li>
+                <li>Incorporate baseline USSD status fail-safes.</li>
+            </ul>
+        </div>
+        <div class="roadmap-card">
+            <h4>Year 1 - Q4: Public Ecosystem Launch</h4>
+            <ul>
+                <li>Deploy public access layers via production domains.</li>
+                <li>Implement localized landmark telemetry arrays.</li>
+                <li>Introduce dynamic adaptive telemetry power throttling.</li>
+            </ul>
+        </div>
+    </div>
+
+    <h3>Year 2: Scale, Integrations & Systems Growth</h3>
+    <div class="roadmap-grid">
+        <div class="roadmap-card">
+            <h4>Year 2 - Q1: Logistics API Channels</h4>
+            <ul>
+                <li>Open developer API portals for external networks.</li>
+                <li>Build deep links for logistics and transport suites.</li>
+                <li>Anonymize metrics to generate public risk maps.</li>
+            </ul>
+        </div>
+    </div>
 
     <h2>👥 Group 39</h2>
     <p>Built with ☕ + ⚡ over 4 weeks.</p>
@@ -315,7 +416,7 @@
         toggleBtn.textContent = theme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
     }
 
-    // Copy to Clipboard Clipboard API Logic
+    // Copy to Clipboard Logic
     const otpEl = document.getElementById('otpCode');
     const toastEl = document.getElementById('copyToast');
 
