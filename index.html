@@ -43,17 +43,17 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
             background-color: var(--bg-color);
             color: var(--text-color);
-            font-size: 14px;
-            line-height: 1.5;
+            font-size: 12px; /* Reduced from 14px for extreme scannability */
+            line-height: 1.4;
             margin: 0;
-            padding: 16px;
+            padding: 12px;
             display: flex;
             justify-content: center;
             transition: background-color 0.3s, color 0.3s;
         }
 
         .container {
-            max-width: 720px;
+            max-width: 680px;
             width: 100%;
             position: relative;
         }
@@ -65,10 +65,10 @@
             background-color: var(--toggle-bg);
             color: var(--toggle-text);
             border: 1px solid var(--border-color);
-            padding: 4px 8px;
-            border-radius: 6px;
+            padding: 3px 6px;
+            border-radius: 4px;
             cursor: pointer;
-            font-size: 0.75rem;
+            font-size: 11px;
             font-weight: 500;
             transition: background-color 0.2s;
         }
@@ -80,39 +80,39 @@
         h1, h2, h3, h4 {
             color: var(--header-text);
             font-weight: 600;
-            margin-top: 20px;
-            margin-bottom: 8px;
+            margin-top: 12px;
+            margin-bottom: 6px;
         }
 
         h1 {
-            font-size: 1.5rem;
+            font-size: 1.3rem; /* Scaled down */
             border-bottom: 1px solid var(--border-color);
-            padding-bottom: 6px;
+            padding-bottom: 4px;
             margin-top: 0;
             padding-right: 100px;
         }
 
         h2 {
-            font-size: 1.15rem;
+            font-size: 1.05rem; /* Scaled down */
             border-bottom: 1px solid var(--border-color);
-            padding-bottom: 4px;
+            padding-bottom: 3px;
         }
 
         h3 {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             margin: 0;
         }
 
         h4 {
-            font-size: 0.9rem;
-            margin-top: 10px;
-            margin-bottom: 4px;
+            font-size: 0.85rem;
+            margin-top: 6px;
+            margin-bottom: 2px;
             color: var(--link-color);
         }
 
         p {
             margin-top: 0;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
 
         a {
@@ -127,8 +127,8 @@
         blockquote {
             background-color: var(--quote-bg);
             border-left: 3px solid var(--accent-color);
-            margin: 12px 0;
-            padding: 10px 12px;
+            margin: 10px 0;
+            padding: 8px 10px;
             border-radius: 0 4px 4px 0;
         }
 
@@ -136,31 +136,31 @@
             margin: 0;
             font-style: italic;
             color: var(--header-text);
-            font-size: 0.95rem;
+            font-size: 0.85rem;
         }
 
         hr {
             border: 0;
             border-top: 1px solid var(--border-color);
-            margin: 24px 0;
+            margin: 16px 0;
         }
 
         ul {
-            padding-left: 18px;
+            padding-left: 16px;
             margin-top: 0;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
 
         li {
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         code {
             background-color: var(--code-bg);
-            padding: 2px 4px;
+            padding: 1px 3px;
             border-radius: 3px;
             font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
-            font-size: 0.85rem;
+            font-size: 11px;
             color: var(--code-text);
         }
 
@@ -180,10 +180,10 @@
 
         .copy-toast {
             display: inline-block;
-            font-size: 0.75rem;
+            font-size: 11px;
             color: var(--copy-success);
             font-weight: 600;
-            margin-left: 6px;
+            margin-left: 4px;
             opacity: 0;
             transition: opacity 0.2s ease;
         }
@@ -193,34 +193,34 @@
         }
 
         .block-step {
-            margin-bottom: 12px;
-            padding-left: 10px;
+            margin-bottom: 8px;
+            padding-left: 8px;
             border-left: 2px solid var(--border-color);
         }
         
         .block-step p {
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         /* Roadmap Grid UI */
         .roadmap-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 12px;
+            gap: 8px;
+            margin-top: 8px;
         }
 
         .roadmap-card {
             background-color: var(--roadmap-step-bg);
             border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 12px;
+            border-radius: 4px;
+            padding: 8px;
         }
 
         .roadmap-card h4 {
             margin-top: 0;
             border-bottom: 1px solid var(--border-color);
-            padding-bottom: 4px;
+            padding-bottom: 2px;
         }
 
         @media (max-width: 600px) {
@@ -230,7 +230,7 @@
             .theme-toggle-btn {
                 position: static;
                 display: block;
-                margin-bottom: 12px;
+                margin-bottom: 10px;
                 width: 100%;
                 text-align: center;
             }
@@ -258,19 +258,19 @@
     <h2>🔗 Project Links</h2>
 
     <p>
-        <strong style="display: inline-block; width: 140px;">📱 Live app:</strong> 
+        <strong style="display: inline-block; width: 120px;">📱 Live app:</strong> 
         <a href="https://github.io" target="_blank" rel="noopener noreferrer">anthonyosakwe.github.io/lifeline/lifelineapp/</a>
     </p>
     <p>
-        <strong style="display: inline-block; width: 140px;">📐 Wireframes (lo-fi):</strong> 
+        <strong style="display: inline-block; width: 120px;">📐 Wireframes (lo-fi):</strong> 
         <a href="https://github.io" target="_blank" rel="noopener noreferrer">anthonyosakwe.github.io/lifeline/wireframes/</a>
     </p>
     <p>
-        <strong style="display: inline-block; width: 140px;">📁 Supporting docs:</strong> 
+        <strong style="display: inline-block; width: 120px;">📁 Supporting docs:</strong> 
         <span>PRD, research, design files &rarr; </span><a href="https://google.com" target="_blank" rel="noopener noreferrer">Google Drive folder</a>
     </p>
     <p>
-        <strong style="display: inline-block; width: 140px;">📄 Build docs:</strong> 
+        <strong style="display: inline-block; width: 120px;">📄 Build docs:</strong> 
         <a href="https://github.io" target="_blank" rel="noopener noreferrer">anthonyosakwe.github.io/lifeline/lifeline-build-docs/</a>
     </p>
 
@@ -304,7 +304,7 @@
         <p><strong>Bottom demo nav</strong> &bull; Jump instantly between flows: 🔑 Onboard · 🏠 Safe Arrival · 🚨 SOS · ⚠️ Failures</p>
     </div>
 
-    <p style="margin-top: 12px;"><strong>Three failure paths to demo:</strong> wrong OTP code &bull; location permission denied &bull; trip ETA overdue</p>
+    <p style="margin-top: 8px;"><strong>Three failure paths to demo:</strong> wrong OTP code &bull; location permission denied &bull; trip ETA overdue</p>
     <p><strong>Two delighters:</strong> confetti on safe arrival &bull; shake-to-SOS hint</p>
 
     <h2>🛠️ Tech Highlights</h2>
@@ -391,7 +391,7 @@
     <h2>👥 Group 39</h2>
     <p>Built with ☕ + ⚡ over 4 weeks.</p>
 
-    <p style="font-style: italic; font-size: 0.8rem; color: #8b949e; margin-top: 24px;">If you have access issues with the Drive folder, contact the team — link sharing is set to "Anyone with the link · Viewer."</p>
+    <p style="font-style: italic; font-size: 0.75rem; color: #8b949e; margin-top: 16px;">If you have access issues with the Drive folder, contact the team — link sharing is set to "Anyone with the link · Viewer."</p>
 </div>
 
 <script>
