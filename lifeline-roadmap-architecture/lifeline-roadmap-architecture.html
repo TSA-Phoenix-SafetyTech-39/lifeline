@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLine 🚨 - Capstone Documentation</title>
+    
+    <!-- Load the official standalone Mermaid runtime library engine -->
+    <script type="module">
+        import mermaid from 'https://unpkg.com';
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'dark'
+        });
+    </script>
+
+    <style>
+        /* === LifeLine Brand System === */
+        /* Dark Theme (default) - matches the night sky palette */
+        :root {
+            --bg-color: #0A1E3F;         /* Navy base */
+            --bg-elevated: #102650;      /* Elevated layer */
+            --text-color: #E5EAF2;       /* Off-white */
+            --text-muted: #9FB4D0;       /* Muted blue */
+            --accent-color: #EF4444;     /* Red highlight */
+            --link-color: #2DD4BF;       /* Teal links */
+            --link-hover: #86EFAC;       /* Mint hover */
+            --safe-color: #10B981;       /* Green safe accent */
+            --border-color: #1E3A6F;     /* Soft border */
+            --quote-bg: #102650;
+            --header-text: #FFFFFF;
+            --code-bg: #1E3A6F;
+            --code-text: #86EFAC;
+            --toggle-bg: #102650;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            max-width: 800px;
+        }
+
+        h1 {
+            color: var(--header-text);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        /* Interactive Map Navigation Container */
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--bg-elevated);
+            padding: 0.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .tab-btn {
+            background: transparent;
+            color: var(--text-muted);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn:hover {
+            color: var(--link-hover);
+        }
+
+        .tab-btn.active {
+            background: var(--border-color);
+            color: var(--header-text);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .map-viewport {
+            width: 100%;
+            max-width: 1000px;
+            background: var(--bg-elevated);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            box-sizing: border-box;
+        }
+
+        .map-panel {
+            display: none;
+            overflow-x: auto;
+        }
+
+        .map-panel.active {
+            display: block;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+            background: transparent !important;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>LifeLine Technical Architecture Center</h1>
+        <p>Engineering blueprints detailing the transition to the V2 backend architecture layers and the accompanying 2-year development lifecycle.</p>
+    </header>
+
+    <!-- Navigation Tab Links -->
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('v2-backend')">V2 Backend Migration</button>
+        <button class="tab-btn" onclick="switchTab('strategic-roadmap')">2-Year Strategic Roadmap</button>
+    </div>
+
+    <!-- Map Contents Wrapper -->
+    <div class="map-viewport">
+        
+        <!-- Panel 1: System Architecture Diagram Flow -->
+        <div id="v2-backend" class="map-panel active">
+            <div class="mermaid">
+            graph TD
+                %% Base styling definitions
+                classDef client fill:#1f242c,stroke:#30363d,stroke-width:2px,color:#c9d1d9;
+                classDef internet fill:#161b22,stroke:#58a6ff,stroke-width:2px,color:#58a6ff;
+                classDef edge fill:#161b22,stroke:#da3633,stroke-width:2px,color:#da3633;
+                classDef data fill:#21262d,stroke:#3fb950,stroke-width:2px,color:#3fb950;
+                classDef offline fill:#2c1f1f,stroke:#ff7b72,stroke-width:1px,color:#ff7b72,stroke-dasharray: 5 5;
+
+                %% Core Components
+                subgraph Frontend [LifeLine Client - ~210KB Engine]
+                    App[Single-File Web App]
+                    Storage[(Browser localStorage)]
+                end
+                class App,Storage client;
+
+                subgraph ConnectionState [Network Router Logic]
+                    GoodNet{Network Signal Strong?}
+                    BadNet[Low-Data/No-Signal Mode]
+                end
+                class GoodNet internet;
+                class BadNet offline;
+
+                subgraph Backend [Supabase Cloud Stack]
+                    Auth[WhatsApp/SMS Passwordless Auth]
+                    Realtime[WebSockets real-time channel]
+                    DB[(PostgreSQL Database Layer)]
+                    EdgeFunc[Supabase Edge Functions]
+                end
+                class Auth,Realtime internet;
+                class DB data;
+                class EdgeFunc edge;
+
+                subgraph Telephony [External Alert Gateways]
+                    SMS[Termii/Twilio API Gateway]
+                end
+                class SMS edge;
+
+                %% Architecture Logic Mapping
+                App --> ConnectionState
+                
+                %% Path A: Optimal Connectivity Flow
+                GoodNet -->|Yes| Auth
+                GoodNet -->|Yes| Realtime
+                Realtime <-->|Live Stream Coordinates| DB
+                
+                %% Path B: Offline-First Failuresafe Sync Flow
+                BadNet -->|No Network| Storage
+                Storage "-.->|Incremental" HTTP Payload Retry| DB
+
+                %% Automated Edge Alert Layer
+                DB -->|Trigger: ETA Expired OR SOS Active| EdgeFunc
+                EdgeFunc -->|Automated Voice / Text Payload| SMS
+                SMS -->|Direct Telecom Circuit Delivery| TrustedContact[Trusted Circle Handsets]
+                
+                class TrustedContact client;
+            </div>
+        </div>
+
+        <!-- Panel 2: Product Roadmap Timeline Engine -->
+        <div id="strategic-roadmap" class="map-panel">
+            <div class="mermaid">
+            gantt
+                title LifeLine V2 Backend Migration & Product Roadmap (2-Year Strategy)
+                dateFormat  YYYY-MM
+                axisFormat  Q%q %Y
+
+                section Foundation & Auth (Y1: Q1-Q2)
+                Supabase Stack & DB Schema Setup      :active, p1, 2026-06, 30d
+                WhatsApp & SMS Passwordless Auth      :p2, after p1, 45d
+                ~210KB Engine Optimization            :p3, after p2, 30d
+
+                section Realtime & Failuresafe (Y1: Q3-Q4)
+                WebSockets Live Coordinate Streams    :p4, 2026-10, 60d
+                Browser localStorage Sync Logic      :p5, after p4, 45d
+                Incremental HTTP Payload Retry Engine :p6, after p5, 45d
+
+                section Edge & Telephony (Y2: Q1-Q2)
+                Supabase Edge Functions Dev           :p7, 2027-04, 60d
+                Termii/Twilio Gateway Integration     :p8, after p7, 45d
+                Automated Voice & SMS Fallback Testing :p9, after p8, 30d
+
+                section Scale & Hardening (Y2: Q3-Q4)
+                Low-Bandwidth Chaos Engineering       :p10, 2027-10, 45d
+                Beta Testing in Low-Signal Zones      :p11, after p10, 45d
+                V2 Production Migration & Launch      :milestone, active, 2028-03-31, 0d
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Tab Engine Logic Scripts -->
+    <script>
+        function switchTab(tabId) {
+            // Deactivate all panels and tabs
+            document.querySelectorAll('.map-panel').forEach(panel => panel.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            // Activate current viewport content
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
+
+</body>
+</html>
