@@ -458,6 +458,13 @@
     <h2>🏗️ Architectural Roadmap (V2 Migration)</h2>
     <p>To scale from a static prototype to a live infrastructure app without damaging network resilience metrics, V2 executes the following backend migrations:</p>
 
+    <div class="architecture-diagram">
+    <div class="mermaid">
+        graph TD
+        A[App] --> B[Backend]
+    </div>
+    </div>
+    
     <div class="block-step">
         <h4>1. Low-Overhead Supabase Authentication</h4>
         <p>Integrate passwordless OTP access via WhatsApp/SMS. If extreme regional congestion limits message transit, the architecture automatically drops to an offline "Guest Mode" powered by cached states in browser <code>localStorage</code>.</p>
