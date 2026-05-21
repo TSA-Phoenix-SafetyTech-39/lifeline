@@ -208,27 +208,27 @@
         <div id="strategic-roadmap" class="map-panel">
             <div class="mermaid">
             gantt
-                title LifeLine V2 Backend Migration & Product Roadmap (2-Year Strategy)
+                title LifeLine V2 Backend Migration & Product Roadmap - 2-Year Strategy
                 dateFormat  YYYY-MM-DD
                 axisFormat  %b %Y
 
                 section Foundation & Auth - Y1 Q1-Q2
-                Supabase Stack & DB Schema Setup      :active, p1, 2026-06, 30d
+                Supabase Stack & DB Schema Setup      :active, p1, 2026-06-01, 30d
                 WhatsApp & SMS Passwordless Auth      :p2, after p1, 45d
                 210KB Engine Optimization            :p3, after p2, 30d
 
                 section Realtime & Failuresafe - Y1 Q3-Q4
-                WebSockets Live Coordinate Streams    :p4, 2026-10, 60d
+                WebSockets Live Coordinate Streams    :p4, 2026-10-01, 60d
                 Browser localStorage Sync Logic      :p5, after p4, 45d
                 Incremental HTTP Payload Retry Engine :p6, after p5, 45d
 
                 section Edge & Telephony - Y2 Q1-Q2
-                Supabase Edge Functions Dev           :p7, 2027-04, 60d
+                Supabase Edge Functions Dev           :p7, 2027-04-01, 60d
                 Termii/Twilio Gateway Integration     :p8, after p7, 45d
                 Automated Voice & SMS Fallback Testing :p9, after p8, 30d
 
                 section Scale & Hardening - Y2 Q3-Q4
-                Low-Bandwidth Chaos Engineering       :p10, 2027-10, 45d
+                Low-Bandwidth Chaos Engineering       :p10, 2027-10-01, 45d
                 Beta Testing in Low-Signal Zones      :p11, after p10, 45d
                 V2 Production Migration & Launch      :milestone, p12, 2028-03-31, 1d
             </div>
@@ -245,7 +245,7 @@
             
             // Activate current viewport content
             document.getElementById(tabId).classList.add('active');
-            button.classList.add('active');
+            event.target.classList.add('active');
             mermaid.run();
         }
     </script>
