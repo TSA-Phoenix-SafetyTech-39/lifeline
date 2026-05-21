@@ -7,12 +7,16 @@
     
     <!-- Load the official standalone Mermaid runtime library engine -->
     <script type="module">
-        import mermaid from 'https://unpkg.com';
-        mermaid.initialize({ 
-            startOnLoad: true,
-            theme: 'dark'
-        });
-    </script>
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+window.mermaid = mermaid;
+
+mermaid.initialize({
+    startOnLoad: true,
+    theme: 'dark',
+    securityLevel: 'loose'
+});
+</script>
 
     <style>
         /* === LifeLine Brand System === */
