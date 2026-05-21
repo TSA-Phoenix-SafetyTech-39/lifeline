@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
@@ -321,7 +321,8 @@
 }
 
 .mermaid {
-    min-width: 900px;
+    width: 100%;
+    min-width: unset;
 }
         /* Emergency/SOS highlight */
         .sos-text {
@@ -556,13 +557,6 @@ graph TD
     <title>LifeLine 🚨 - Capstone Documentation</title>
     
     <!-- Load the official standalone Mermaid runtime library engine -->
-    <script type="module">
-        import mermaid from 'https://unpkg.com';
-        mermaid.initialize({ 
-            startOnLoad: true,
-            theme: 'dark'
-        });
-    </script>
 
     <style>
         /* === LifeLine Brand System === */
@@ -830,6 +824,10 @@ graph TD
             box-sizing: border-box;
             overflow-x: auto;
         }
+        .architecture-diagram {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
 
         /* --- Print & Media Queries --- */
         @media (max-width: 480px) {
@@ -867,7 +865,7 @@ graph TD
         <p>The system layout below dictates how edge handlers interface with telephone pipelines while maintaining local browser fallbacks.</p>
 
         <!-- Dynamic Mermaid Map Wrapper Container -->
-        <div class="map-viewport">
+        <div class="map-viewport architecture-diagram">
             <div class="mermaid">
             graph TD
                 %% Base styling definitions
@@ -1273,7 +1271,7 @@ graph TD
     mermaid.initialize({
         startOnLoad: true,
         theme: "dark",
-        securityLevel: "loose"
+        securityLevel: "strict"
     });
 </script>
     
