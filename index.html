@@ -548,6 +548,628 @@ graph TD
         <h4>3. Failover Trigger via Edge Functions</h4>
         <p>Deploy decoupled TypeScript functions to the Supabase Edge Network. The scripts execute immediately if an active trip ETA passes without a secure termination event, communicating with local SMS gateways (Termii/Twilio) to send distress telemetry via traditional telecom lines.</p>
     </div>
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLine 🚨 - Capstone Documentation</title>
+    
+    <!-- Load the official standalone Mermaid runtime library engine -->
+    <script type="module">
+        import mermaid from 'https://unpkg.com';
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'dark'
+        });
+    </script>
+
+    <style>
+        /* === LifeLine Brand System === */
+        /* Dark Theme (default) - matches the night-safety design language of the app */
+        :root, [data-theme="dark"] {
+            --bg-color: #0A1E3F;           /* Navy - primary background */
+            --bg-elevated: #102650;        /* Elevated navy for cards */
+            --text-color: #E5EAF2;         /* Off-white body text */
+            --text-muted: #9FB4D0;         /* Muted blue */
+            --accent-color: #EF4444;       /* Red - emergency / SOS */
+            --link-color: #2DD4BF;         /* Teal - brand accent */
+            --link-hover: #86EFAC;         /* Mint - secondary highlight */
+            --safe-color: #10B981;         /* Green - safe status */
+            --border-color: #1E3A6F;       /* Soft navy border */
+            --quote-bg: #102650;
+            --header-text: #FFFFFF;
+            --code-bg: #1E3A6F;
+            --code-text: #86EFAC;
+            --toggle-bg: #102650;
+            --toggle-text: #E5EAF2;
+            --roadmap-step-bg: #1E3A6F;
+            --logo-glow: rgba(45, 212, 191, 0.15);
+            --table-hdr-bg: #1E3A6F;
+        }
+
+        /* Light Theme - LifeLine palette inverted for daytime readability */
+        [data-theme="light"] {
+            --bg-color: #F8FAFC;
+            --bg-elevated: #FFFFFF;
+            --text-color: #0F172A;         /* Slate body text */
+            --text-muted: #64748B;
+            --accent-color: #DC2626;       /* Slightly darker red for light bg */
+            --link-color: #0D9488;         /* Darker teal for contrast vs light */
+            --link-hover: #16A34A;
+            --safe-color: #059669;
+            --border-color: #E2E8F0;
+            --quote-bg: #F1F5F9;
+            --header-text: #0F172A;        /* Navy headers on light bg */
+            --code-bg: #F1F5F9;
+            --code-text: #0D9488;
+            --toggle-bg: #E2E8F0;
+            --toggle-text: #0F172A;
+            --roadmap-step-bg: #E2E8F0;
+            --logo-glow: rgba(13, 148, 136, 0.08);
+            --table-hdr-bg: #E2E8F0;
+        }
+
+        body {
+            font-family: Helvetica, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            font-size: 13px;
+            line-height: 1.5;
+            margin: 0;
+            padding: 45px 12px;
+            display: flex;
+            justify-content: center;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 638px;
+            width: 100%;
+            position: relative;
+        }
+
+        /* --- Logo Header --- */
+        .lifeline-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-right: 52px; /* room for toggle */
+        }
+
+        .lifeline-logo {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--logo-glow);
+            padding: 0px;
+            flex-shrink: 0;
+        }
+
+        .lifeline-wordmark {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .lifeline-wordmark .title-line {
+            display: flex;
+            align-items: baseline;
+            gap: 2px;
+        }
+
+        .lifeline-wordmark h1 {
+            margin: 0;
+            padding: 0;
+            border: none;
+            font-size: 1.85rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            line-height: 1.1;
+        }
+
+        .lifeline-wordmark .life {
+            color: var(--link-color); /* Teal */
+        }
+
+        .lifeline-wordmark .line {
+            color: var(--accent-color); /* Red */
+        }
+
+        .lifeline-wordmark .tagline {
+            color: var(--text-muted);
+            font-size: 0.70rem;
+            margin-top: 1px;
+            font-style: italic;
+        }
+
+        .theme-toggle-btn {
+            position: absolute;
+            top: 4px;
+            right: 0;
+            background-color: var(--toggle-bg);
+            color: var(--toggle-text);
+            border: 1px solid var(--border-color);
+            padding: 5px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .theme-toggle-btn:hover {
+            opacity: 0.8;
+            transform: translateY(-1px);
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--header-text);
+            font-weight: 700;
+            font-family: Helvetica, sans-serif;
+            margin-bottom: 8px;
+        }
+
+        h2 {
+            font-size: 1.05rem;
+            border-bottom: 1px solid var(--link-color);
+            padding-bottom: 2px;
+            display: inline-block;
+            padding-right: 12px;
+            margin-top: 24px;
+        }
+
+        h3 {
+            font-size: 0.92rem;
+            margin: 16px 0 6px 0;
+            color: var(--link-color);
+        }
+
+        h4 {
+            font-size: 0.85rem;
+            margin-top: 10px;
+            margin-bottom: 4px;
+            color: var(--link-color);
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 12px;
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: var(--link-hover);
+        }
+
+        strong {
+            color: var(--header-text);
+        }
+
+        blockquote {
+            background-color: var(--quote-bg);
+            border-left: 4px solid var(--accent-color);
+            margin: 14px 0;
+            padding: 10px 14px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        blockquote p {
+            font-style: italic;
+            color: var(--header-text);
+            font-size: 0.88rem;
+            margin: 0;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid var(--border-color);
+            margin: 20px 0;
+        }
+
+        ul {
+            padding-left: 18px;
+            margin-top: 0;
+            margin-bottom: 12px;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        li::marker {
+            color: var(--link-color);
+        }
+
+        code {
+            background-color: var(--code-bg);
+            color: var(--code-text);
+            border-radius: 3px;
+            font-family: monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono;
+            font-size: 11px;
+            padding: 2px 4px;
+        }
+
+        /* --- Tables --- */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 14px 0;
+            font-size: 12px;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--table-hdr-bg);
+            color: var(--header-text);
+            font-weight: 700;
+        }
+
+        /* --- Custom Container for Rendered Diagrams --- */
+        .map-viewport {
+            width: 100%;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 16px;
+            margin-top: 16px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-sizing: border-box;
+            overflow-x: auto;
+        }
+
+        /* --- Print & Media Queries --- */
+        @media (max-width: 480px) {
+            body { padding: 20px 8px; }
+            .theme-toggle-btn { position: relative; top: 0; margin-bottom: 12px; }
+            .lifeline-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+        }
+
+        @media print {
+            body { background: white; color: black; }
+            .theme-toggle-btn { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- LifeLine Custom Header Blueprint -->
+        <div class="lifeline-header">
+            <svg class="lifeline-logo" viewBox="0 0 100 100" fill="none" xmlns="http://w3.org">
+                <circle cx="50" cy="50" r="45" fill="#102650" stroke="#2DD4BF" stroke-width="5"/>
+                <path d="M50 25V75M25 50H75" stroke="#EF4444" stroke-width="12" stroke-linecap="round"/>
+            </svg>
+            <div class="lifeline-wordmark">
+                <div class="title-line">
+                    <span class="life">Life</span><span class="line">Line</span>
+                </div>
+                <div class="tagline">Low-Bandwidth Critical Infrastructure Mapping</div>
+            </div>
+        </div>
+
+        <button class="theme-toggle-btn" onclick="toggleTheme()">Toggle Light Mode</button>
+
+        <h2>V2 Backend Migration Map</h2>
+        <p>The system layout below dictates how edge handlers interface with telephone pipelines while maintaining local browser fallbacks.</p>
+
+        <!-- Dynamic Mermaid Map Wrapper Container -->
+        <div class="map-viewport">
+            <div class="mermaid">
+            graph TD
+                %% Base styling definitions
+                classDef client fill:#1f242c,stroke:#30363d,stroke-width:2px,color:#c9d1d9;
+                classDef internet fill:#161b22,stroke:#58a6ff,stroke-width:2px,color:#58a6ff;
+                classDef edge fill:#161b22,stroke:#da3633,stroke-width:2px,color:#da3633;
+                classDef data fill:#21262d,stroke:#3fb950,stroke-width:2px,color:#3fb950;
+                classDef offline fill:#2c1f1f,stroke:#ff7b72,stroke-width:1px,color:#ff7b72,stroke-dasharray: 5 5;
+
+                %% Core Components
+                subgraph Frontend [LifeLine Client - ~210KB Engine]
+                    App[Single-File Web App]
+                    Storage[(Browser localStorage)]
+                end
+                class App,Storage client;
+
+                subgraph ConnectionState [Network Router Logic]
+                    GoodNet{Network Signal Strong?}
+                    BadNet[Low-Data/No-Signal Mode]
+                end
+                class GoodNet internet;
+                class BadNet offline;
+
+                subgraph Backend [Supabase Cloud Stack]
+                    Auth[WhatsApp/SMS Passwordless Auth]
+                    Realtime[WebSockets real-time channel]
+                    DB[(PostgreSQL Database Layer)]
+                    EdgeFunc[Supabase Edge Functions]
+                end
+                class Auth,Realtime internet;
+                class DB data;
+                class EdgeFunc edge;
+
+                subgraph Telephony [External Alert Gateways]
+                    SMS[Termii/Twilio API Gateway]
+                end
+                class SMS edge;
+
+                %% Architecture Logic Mapping
+                App --> ConnectionState
+                
+                %% Path A: Optimal Connectivity Flow
+                GoodNet -->|Yes| Auth
+                GoodNet -->|Yes| Realtime
+                Realtime <-->|Live Stream Coordinates| DB
+                
+                %% Path B: Offline-First Failuresafe Sync Flow
+                BadNet -->|No Network| Storage
+                Storage "-.->|Incremental" HTTP Payload Retry| DB
+
+                %% Automated Edge Alert Layer
+                DB -->|Trigger: ETA Expired OR SOS Active| EdgeFunc
+                EdgeFunc -->|Automated Voice / Text Payload| SMS
+                SMS -->|Direct Telecom Circuit Delivery| TrustedContact[Trusted Circle Handsets]
+                
+                class TrustedContact client;
+            </div>
+        </div>
+
+        <hr>
+
+        <h2>🧠 Architecture Deep Dive</h2>
+        <p>LifeLine is designed using an <strong>offline-first, prevention-first safety architecture</strong> optimized for <strong>low-bandwidth Nigerian mobile environments</strong>.</p>
+        <p>Unlike traditional emergency systems that activate only during crisis moments, LifeLine prioritizes <strong>daily safe-arrival rituals</strong> to normalize trusted-contact communication before emergencies occur.</p>
+        <p>The architecture follows a <strong>graceful degradation model</strong>:</p>
+        <ul>
+            <li>Strong network &rarr; Real-time synchronization</li>
+            <li>Weak network &rarr; Delayed sync + lightweight payloads</li>
+            <li>No signal &rarr; Offline persistence + automatic retry</li>
+        </ul>
+        <p>This ensures the app remains useful even under unstable telecom conditions.</p>
+
+        <hr>
+
+        <h2>⚙️ System Design Principles</h2>
+        
+        <h3>1. Offline-First Reliability</h3>
+        <p>Many Nigerian users experience unstable mobile data, weak signal areas, and intermittent internet access.</p>
+        <p>Instead of failing when connectivity drops, LifeLine temporarily stores trip states locally and retries transmission when signal quality improves.</p>
+        
+        <p><strong>Why this matters</strong></p>
+        <ul>
+            <li>Safety tools should not fail silently</li>
+            <li>Emergency workflows must tolerate poor connectivity</li>
+            <li>Users should still trigger actions with minimal friction</li>
+        </ul>
+
+        <h3>2. Prevention-First Safety Model</h3>
+        <p>LifeLine is intentionally not just an SOS app.</p>
+        <p>The product philosophy is:</p>
+        <blockquote>
+            <p>“The daily safe-arrival habit is what makes emergency response trusted when it matters.”</p>
+        </blockquote>
+        <p>By encouraging users to routinely notify trusted contacts that they arrived safely, LifeLine builds behavioral familiarity before emergencies happen.</p>
+        <p>This increases:</p>
+        <ul>
+            <li>Trust</li>
+            <li>Response speed</li>
+            <li>Contact readiness</li>
+            <li>User retention</li>
+        </ul>
+
+        <hr>
+
+        <h2>🖥️ Frontend Layer</h2>
+        <p>The frontend uses a <strong>single-file HTML architecture (~210 KB)</strong> to maximize portability and deployment simplicity.</p>
+        
+        <h3>Why a Single-File Architecture?</h3>
+        <p>The decision was intentional:</p>
+        <p><strong>Benefits</strong></p>
+        <ul>
+            <li>Zero installation required</li>
+            <li>Deployable to any static host</li>
+            <li>Extremely lightweight</li>
+            <li>Faster loading on poor networks</li>
+            <li>Minimal infrastructure complexity</li>
+        </ul>
+
+        <h3>Core Client Responsibilities</h3>
+        <p>The client handles:</p>
+        <ul>
+            <li>Safe-arrival trip initiation</li>
+            <li>ETA countdown logic</li>
+            <li>GPS permission handling</li>
+            <li>SOS trigger activation</li>
+            <li>Local offline storage</li>
+            <li>Shake detection</li>
+            <li>Vibration feedback</li>
+            <li>Failure-state recovery</li>
+        </ul>
+
+        <h3>Native Device APIs Used</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>API</th>
+                    <th>Purpose</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>navigator.geolocation</code></td>
+                    <td>Live user location</td>
+                </tr>
+                <tr>
+                    <td><code>navigator.vibrate()</code></td>
+                    <td>Emergency haptic feedback</td>
+                </tr>
+                <tr>
+                    <td><code>DeviceMotion API</code></td>
+                    <td>Shake-to-SOS detection</td>
+                </tr>
+                <tr>
+                    <td><code>localStorage</code></td>
+                    <td>Offline persistence</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <hr>
+
+        <h2>🌐 Connectivity Decision Engine</h2>
+        <p>LifeLine dynamically changes behavior depending on signal quality.</p>
+        
+        <h3>Strong Network Path</h3>
+        <p>When connectivity is available:</p>
+        <ol>
+            <li>User location syncs in near real-time</li>
+            <li>ETA updates stream to backend services</li>
+            <li>Trusted contact tracking remains active</li>
+            <li>Emergency escalation happens instantly</li>
+        </ol>
+
+        <h3>Weak/No Signal Path</h3>
+        <p>When signal quality deteriorates:</p>
+        <ol>
+            <li>Trip data stores locally</li>
+            <li>Retry queue activates</li>
+            <li>Lightweight sync attempts occur incrementally</li>
+            <li>Emergency state persists until connection returns</li>
+        </ol>
+        <p>This reduces total failure risk in poor coverage zones.</p>
+
+        <hr>
+
+        <h2>☁️ Backend Architecture (V2 Migration)</h2>
+        <p>LifeLine V2 transitions from a frontend-only prototype into a cloud-assisted architecture powered by <strong>Supabase</strong>.</p>
+        
+        <h3>Why Supabase?</h3>
+        <p>Supabase was selected because it provides:</p>
+        <ul>
+            <li>Authentication</li>
+            <li>Real-time database updates</li>
+            <li>Edge Functions</li>
+            <li>PostgreSQL reliability</li>
+            <li>Low infrastructure overhead</li>
+        </ul>
+        <p>without requiring a heavy DevOps setup.</p>
+
+        <h3>Backend Components</h3>
+        
+        <h4>Authentication Layer</h4>
+        <p>Passwordless authentication using:</p>
+        <ul>
+            <li>WhatsApp OTP</li>
+            <li>SMS verification</li>
+        </ul>
+        <p>This minimizes onboarding friction and avoids password fatigue.</p>
+
+        <h4>PostgreSQL Database Layer</h4>
+        <p>Stores:</p>
+        <ul>
+            <li>User profiles</li>
+            <li>Trusted contacts</li>
+            <li>Trip sessions</li>
+            <li>ETA states</li>
+            <li>Emergency logs</li>
+            <li>Location snapshots</li>
+        </ul>
+
+        <h4>Realtime Engine</h4>
+        <p>WebSocket channels stream trip status updates to trusted contacts.</p>
+        <p>Examples:</p>
+        <ul>
+            <li>“Started trip”</li>
+            <li>“Running late”</li>
+        </ul>
+        <ul>
+            <li>“Arrived safely”</li>
+            <li>“SOS triggered”</li>
+        </ul>
+
+        <h4>Edge Functions</h4>
+        <p>Automated backend logic handles:</p>
+        <ul>
+            <li>Expired ETA timers</li>
+            <li>Missed check-ins</li>
+            <li>SOS escalation</li>
+            <li>Alert routing</li>
+        </ul>
+        <p>without waiting for manual user intervention.</p>
+
+        <hr>
+
+        <h2>📡 Alert Escalation Layer</h2>
+        <p>If a user becomes overdue or activates SOS:</p>
+        <h4>Step 1</h4>
+        <p>Backend detects risk event.</p>
+        <h4>Step 2</h4>
+        <p>Edge Function evaluates escalation rules.</p>
+        <h4>Step 3</h4>
+        <p>Alert payload generates automatically.</p>
+        <h4>Step 4</h4>
+        <p>SMS/WhatsApp provider dispatches message to trusted contacts.</p>
+        <p>Potential providers:</p>
+        <ul>
+            <li>Termii (Nigeria-first SMS)</li>
+            <li>Twilio (global redundancy)</li>
+        </ul>
+        <p>This creates a telecom failover layer for reliability.</p>
+
+        <hr>
+
+        <h2>🔒 Privacy & Safety Considerations</h2>
+        <p>LifeLine minimizes unnecessary surveillance.</p>
+        <p>The system philosophy is:</p>
+        <blockquote class="emergency-highlight">
+            <p>“Safety without over-tracking.”</p>
+        </blockquote>
+        <p>Location is used only for:</p>
+        <ul>
+            <li>Active trip monitoring</li>
+            <li>ETA validation</li>
+            <li>Emergency escalation</li>
+        </ul>
+        <p>Rather than persistent background surveillance.</p>
+        <p>User trust remains a core design requirement.</p>
+
+        <hr>
+
+        <h2>📈 Scalability Strategy</h2>
+        <p>The architecture is intentionally modular.</p>
+        <h4>V1</h4>
+        <p>Frontend-only prototype</p>
+        <h4>V2</h4>
+        <p>Supabase + telecom integrations</p>
+        <h4>V3</h4>
+        <p>Emergency ecosystem integrations</p>
+        <p>Potential future integrations:</p>
+        <ul>
+            <li>Ride-hailing APIs</li>
+            <li>Emergency medical dispatch</li>
+            <li>Campus security systems</li>
+            <li>Municipal emergency services</li>
+            <li>Smart geofenced danger zones</li>
+        </ul>
+        <p>This architecture allows LifeLine to scale incrementally without rebuilding the core product.</p>
+    </div>
+
+
+</body>
+</html>
 
     <h2>📅 2-Year Strategic Product Roadmap</h2>
     <p>The progression pathway guiding LifeLine from a Capstone proof-of-concept into an ecosystem web service:</p>
