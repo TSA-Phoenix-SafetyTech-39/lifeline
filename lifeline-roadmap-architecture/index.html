@@ -7,16 +7,16 @@
     
     <!-- Load the official standalone Mermaid runtime library engine -->
     <script type="module">
-import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
 
-window.mermaid = mermaid;
+        window.mermaid = mermaid;
 
-mermaid.initialize({
-    startOnLoad: true,
-    theme: 'dark',
-    securityLevel: 'loose'
-});
-</script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            securityLevel: 'loose'
+        });
+    </script>
 
     <style>
         /* === LifeLine Brand System === */
@@ -193,7 +193,7 @@ mermaid.initialize({
                 
                 %% Path B: Offline-First Failuresafe Sync Flow
                 BadNet -->|No Network| Storage
-                Storage -.->|Incremental" HTTP Payload Retry| DB
+                Storage -.->|Incremental HTTP Payload Retry| DB
 
                 %% Automated Edge Alert Layer
                 DB -->|Trigger: ETA Expired OR SOS Active| EdgeFunc
