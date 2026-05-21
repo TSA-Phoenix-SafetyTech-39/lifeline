@@ -310,7 +310,19 @@
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 4px;
         }
+/* Mermaid Diagram Container */
+.architecture-diagram {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 16px;
+    margin-top: 12px;
+    overflow-x: auto;
+}
 
+.mermaid {
+    min-width: 900px;
+}
         /* Emergency/SOS highlight */
         .sos-text {
             color: var(--accent-color);
@@ -511,7 +523,15 @@
             </ul>
         </div>
     </div>
+<h2>Mermaid Test</h2>
 
+<div class="mermaid">
+graph TD
+    A[LifeLine App] --> B[Supabase]
+    B --> C[SMS Alerts]
+</div>
+
+    
     <h2>👥 Group 39</h2>
     <p>Built with ☕ + ⚡ over 4 weeks.</p>
 
@@ -555,6 +575,16 @@
         });
     });
 </script>
+<!-- Mermaid.js -->
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
 
+    mermaid.initialize({
+        startOnLoad: true,
+        theme: "dark",
+        securityLevel: "loose"
+    });
+</script>
+    
 </body>
 </html>
