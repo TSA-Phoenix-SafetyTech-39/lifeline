@@ -476,14 +476,13 @@ optimized for Nigerian mobile networks and low-bandwidth environments.
 
 <div class="architecture-diagram">
     <div class="mermaid">
-
-graph TD
+        graph TD
     %% Base styling definitions
     classDef client fill:#1f242c,stroke:#30363d,stroke-width:2px,color:#c9d1d9;
     classDef internet fill:#161b22,stroke:#58a6ff,stroke-width:2px,color:#58a6ff;
     classDef edge fill:#161b22,stroke:#da3633,stroke-width:2px,color:#da3633;
     classDef data fill:#21262d,stroke:#3fb950,stroke-width:2px,color:#3fb950;
-    classDef offline fill:#2c1f1f,stroke:#ff7b72,stroke-width:1px,color:#ff7b72,
+    classDef offline fill:#2c1f1f,stroke:#ff7b72,stroke-width:1px,color:#ff7b72;
 
     subgraph Frontend [LifeLine Client - ~210KB Engine]
         App[Single-File Web App]
@@ -527,6 +526,7 @@ graph TD
     SMS -->|Direct Telecom Circuit Delivery| TrustedContact[Trusted Circle Handsets]
 
     class TrustedContact client;
+
 
     </div>
 </div>
@@ -873,7 +873,7 @@ graph TD
                 classDef internet fill:#161b22,stroke:#58a6ff,stroke-width:2px,color:#58a6ff;
                 classDef edge fill:#161b22,stroke:#da3633,stroke-width:2px,color:#da3633;
                 classDef data fill:#21262d,stroke:#3fb950,stroke-width:2px,color:#3fb950;
-                classDef offline fill:#2c1f1f,stroke:#ff7b72,stroke-width:1px,color:#ff7b72,
+                classDef offline fill:#2c1f1f,stroke:#ff7b72,stroke-width:1px,color:#ff7b72;
 
                 %% Core Components
                 subgraph Frontend [LifeLine Client - ~210KB Engine]
@@ -914,7 +914,7 @@ graph TD
                 
                 %% Path B: Offline-First Failuresafe Sync Flow
                 BadNet -->|No Network| Storage
-                Storage "-.->|Incremental" HTTP Payload Retry| DB
+                Storage -.->|Incremental HTTP Payload Retry| DB
 
                 %% Automated Edge Alert Layer
                 DB -->|Trigger: ETA Expired OR SOS Active| EdgeFunc
