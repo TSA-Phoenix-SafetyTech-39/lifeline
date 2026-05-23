@@ -10,10 +10,10 @@ A personal-safety check-in app built for Nigerian mobile networks. Prevention-fi
 
 ## 🔗 Project Links
 
-*   **📱 Live App:** [tsa-phoenix-safetytech-39.github.io/lifeline/lifelineapp/](https://github.io)
-*   **📐 Wireframes (lo-fi):** [tsa-phoenix-safetytech-39.github.io/lifeline/wireframes/](https://github.io)
-*   **📁 Supporting Documents (PRD, Research, Design):** [Google Drive Folder](https://google.com)
-*   **📄 Build Documentation:** [lifeline-build-docs](https://github.io)
+*   **📱 Live App:** [tsa-phoenix-safetytech-39.github.io/lifeline/lifelineapp/](/lifelineapp/index.html)
+*   **📐 Wireframes (lo-fi):** [tsa-phoenix-safetytech-39.github.io/lifeline/wireframes/](/wireframes/index.html)
+*   **📁 Supporting Documents (PRD, Research, Design):** [Google Drive Folder](https://drive.google.com/drive/folders/1-Brs6CcKtow2uwkJsMumYC0nG7bJPqE1)
+*   **📄 Build Documentation:** [lifeline-build-docs](/lifeline-build-docs/index.html)
 
 ---
 
