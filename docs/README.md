@@ -55,14 +55,17 @@ A personal-safety check-in app built for Nigerian mobile networks. Prevention-fi
 
 
 *    **Team Process Evidence** ✅
-      * *>(Screenshots count as evidence)*
-      * *>RACI*✅  👉[RACI](RACI_TABLE-CHART_TSA39_CAPSTONE_PHOENIX.pdf)
-      * *>Roadmap*✅ [👉 easy access at Architecture documents](../lifeline-roadmap-architecture/)
-      * *>sprint board*✅  👉[Board.v1](Sprint Board_v1.PDF)  👉[Board.v2](Sprint Board_v2.PDF) 👉[Board.v3](Sprint Board_v1.PDF)
-      * *>Decision Log:*✅  👉[Decision Log](LifeLine_Decision_Log_v2_FINAL.md)
+     * >*(Screenshots count as evidence)*
+       *  *>RACI*✅  👉[RACI](RACI_TABLE-CHART_TSA39_CAPSTONE_PHOENIX.pdf)
+       * *>Roadmap*✅ [👉 easy access at Architecture documents](../lifeline-roadmap-architecture/)
+       * *>sprint board*✅
+          * 👉[Board.v1](Sprint Board_v1.PDF)
+          * 👉[Board.v2](Sprint Board_v2.PDF)
+          * 👉[Board.v3](Sprint Board_v1.PDF)
+       * *>Decision Log:*✅  👉[Decision Log](LifeLine_Decision_Log_v2_FINAL.md)
       * *Weekly Product Updates:* ✅
       * *>4 entries from sprint board history*
-      * [weekly-updates](lifeline-weekly-updates.md)
+        * [weekly-updates](lifeline-weekly-updates.md)
 
 
 
