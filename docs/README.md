@@ -73,7 +73,10 @@ A personal-safety check-in app built for Nigerian mobile networks. Prevention-fi
          
          * [README](../README.md)
 
-[Demo Video](https://github.com/TSA-Phoenix-SafetyTech-39/lifeline/blob/main/video/VideoCompress_Screen_Recording_20260524_122822_Chrome.mp4)
+
+![Demo Video](https://drive.google.com/file/d/1xvLQVTY8GfSEPbczc7N2SrNpi8LDGfYw/view?usp=drivesdk)
+
+[Demo Video](video/VideoCompress_Screen_Recording_20260524_122822_Chrome.mp4)
 
 <video src="./VideoCompress_Screen_Recording_20260524_122822_Chrome.mp4" width="600" controls></video>
 
