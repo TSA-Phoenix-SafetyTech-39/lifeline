@@ -39,7 +39,7 @@ A personal-safety check-in app built for Nigerian mobile networks. Prevention-fi
         
          * [Wire Frames](../wireframes)
            
-         * [Product Design](Product_LifeLine_Product_Design_v7_FINAL.html)
+         * [Product Design](LifeLine_Product_Design_v7_FINAL.html)
 
 *    **05 - Build Evidence Working demo URL** ✅
      * >*MVP scope, Architecture (boxes & arrows), Network resilience*
