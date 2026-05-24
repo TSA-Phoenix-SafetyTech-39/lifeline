@@ -75,7 +75,7 @@ Shared via single public link
 
 
 Submission form
-https://orms.gle/Pn4VWo7LBJWD3tAK6
+https://forms.gle/Pn4VWo7LBJWD3tAK6
 
 
 
