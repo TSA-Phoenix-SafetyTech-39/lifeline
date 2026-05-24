@@ -12,36 +12,36 @@ A personal-safety check-in app built for Nigerian mobile networks. Prevention-fi
 
 
 *   **📱 01 - One-pager Brief:** ✅
-    *   [PDF](LifeLine_One_Pager_v3_FINAL.pdf) 👉[Download doc here](LifeLine_One_Pager_v3_FINAL.docx)
+         * [PDF](LifeLine_One_Pager_v3_FINAL.pdf)
 
 
 *   **📁 02 - Discovery evidence** ✅
       * >*synthesised insights + raw notes & screenshots*
 
-    * [Full Discovery](LifeLine_Discovery_Evidence_v2_FINAL.pdf)
+         * [Full Discovery](LifeLine_Discovery_Evidence_v2_FINAL.pdf)
 
-    * >*[QUANTitative Evidence]
-       * [QUANT-](LifeLine_Survey_Responses.pdf)
+      
+         * [Quantitative Evidence](LifeLine_Survey_Responses.pdf)
 
-    * >*QUALITative Evidence*
-       * [QUALI-](LifeLine_Qualitative_Interview_Notes_v1_FINAL.pdf)
+
+         * [Qualitative Evidence](LifeLine_Qualitative_Interview_Notes_v1_FINAL.pdf)
        
 
 
 
 *   **📱 03 - PRD** ✅
     * >*Stories. AC, prioritisation, NFRs, edge cases*
-    * [PRD](LifeLine_PRD_v3_FINAL.pdf)
+       * [PRD](LifeLine_PRD_v3_FINAL.pdf)
 
 
 *    **04 - Design Pack Figma prototype** ✅
-     * >*Link -+ design system documentation*
-        * [Product Design](LifeLine_Product_Design_v2.html)
+      * >*Link -+ design system documentation*
+         * [Product Design](LifeLine_Product_Design_v2.html)
 
 *    **05 - Build Evidence Working demo URL** ✅
      * >*MVP scope, Architecture (boxes & arrows), Network resilience*
      * >*Data flow, Build & run, Demo ch3at sheet*
-     * >*Manual Test & Tesults, Known Limitations+tech debt list*
+     * >*Manual Test Plan & Tesults, Known Limitations+tech debt list*
      * >*Itirations 1 & 2: Tested in incognito on at least 2 devices*
      * >*Itirations 1 & 2: Happy path, Failure path, + delighters*
      * >*Vibe-coding evidence*
@@ -52,21 +52,16 @@ A personal-safety check-in app built for Nigerian mobile networks. Prevention-fi
 
 
 
-*    **Test plan + results** ✅
-     * *>Known limits +tech debt list*
-
-
-
 
 *    **Metrics & tracking** ✅
-     * *>Event plan tied to 2 flows + mock dashboard*
-
-
+     * >*Event plan tied to 2 flows + mock dashboard*
+        *[Metrics](LifeLine_Metrics_and_Tracking_Plan_v2_FINAL.pdf)
+        *[Metrics.MD](LifeLine_Metrics_and_Tracking_Plan_v1_FINAL.md) 
 
 *    **GIM mini-plan** ✅
-     * *>Positioning onboarding channels rollout.feedback*
-
-
+     * >*Positioning onboarding channels rollout.feedback*
+      * [GTM Mini Plan](LifeLine_Metrics_and_Tracking_Plan_v2_FINAL.pdf)
+      
 
 *    **Team Process Evidence** ✅
      * >*(Screenshots count as evidence)*
