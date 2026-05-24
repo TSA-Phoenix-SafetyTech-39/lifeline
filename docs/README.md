@@ -48,10 +48,14 @@ A personal-safety check-in app built for Nigerian mobile networks. Prevention-fi
      * >*Itirations 1 & 2: Tested in incognito on at least 2 devices*
      * >*Itirations 1 & 2: Happy path, Failure path, + delighters*
      * >*Vibe-coding evidence*
-       >*README + Architecture* [Build Documentation](../lifeline-build-docs/)
-       >*Run Instructions
-*    **README + architectue** ✅
-     * *>Run instructions +t boxes-and-arrows diagram*
+     * >*README + Run instructions + Architecture - boxes and arrow diagram*
+     * >*lteration/ change log - At least one before/atfter entry*
+
+         *[Build Evidence](
+       
+         * [Build Documentation](../lifeline-build-docs/)
+         
+         * [README](../README.md)
 
 
 
@@ -60,6 +64,7 @@ A personal-safety check-in app built for Nigerian mobile networks. Prevention-fi
      * >*Event plan tied to 2 flows + mock dashboard*
         *[Metrics](LifeLine_Metrics_and_Tracking_Plan_v2_FINAL.pdf) 
 
+
 *    **GIM mini-plan** ✅
      * >*Positioning onboarding channels rollout.feedback*
       * [GTM Mini Plan](LifeLine_Metrics_and_Tracking_Plan_v2_FINAL.pdf)
@@ -67,23 +72,26 @@ A personal-safety check-in app built for Nigerian mobile networks. Prevention-fi
 
 *    **Team Process Evidence** ✅
      * >*(Screenshots count as evidence)*
-       *  *>RACI*✅  👉[RACI](RACI_TABLE-CHART_TSA39_CAPSTONE_PHOENIX.pdf)
+     
+       * *>RACI*✅  👉[RACI](RACI_TABLE-CHART_TSA39_CAPSTONE_PHOENIX.pdf)
+
        * *>Roadmap*✅ [👉 easy access at Architecture documents](../lifeline-roadmap-architecture/)
+       
        * *>sprint board*✅
-          * 👉[Board.v1](Sprint Board_v1.PDF)
-          * 👉[Board.v2](Sprint Board_v2.PDF)
-          * 👉[Board.v3](Sprint Board_v1.PDF)
+          * 👉[Board.v1](Sprint_Board_v1.pdf)
+          * 👉[Board.v2](Sprint_Board_v2.pdf)
+          * 👉[Board.v3](Sprint_Board_v1.pdf)
+       
        * *>Decision Log:*✅  👉[Decision Log](Decision-Log.pdf)
+  
       * *Weekly Product Updates:* ✅
-      * *>4 entries from sprint board history*
-        * [weekly-updates](lifeline-weekly-updates.md)
+        * >*4 entries from sprint board history*
+           * [weekly-updates](lifeline-weekly-updates.md)
 
 
 
 
-*    **lteration/ change log** ✅
-     * *>At least one before/atfter entry*
-
+*    **
 
 *    **Pitch deck (10 slides)** ✅
       * *>+ backup demo video on YouTube unlisted*
