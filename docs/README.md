@@ -19,7 +19,7 @@ A personal-safety check-in app built for Nigerian mobile networks. Prevention-fi
 *   **📱 GTM Mini Plan:** [GTM Mini Plan](LifeLine_GTM_Mini_Plan_v1_FINAL.md)
 
 
-*   **📱 GTM Mini Plan:** [GTM Mini Plan](LifeLine_GTM_Mini_Plan_v1_FINAL.md)
+*   **📱 Product Design:** [Product Design](LifeLine_Product_Design_v2.html)
 
 
 *   **📱 GTM Mini Plan:** [GTM Mini Plan](LifeLine_GTM_Mini_Plan_v1_FINAL.md)
