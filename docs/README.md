@@ -36,7 +36,7 @@ A personal-safety check-in app built for Nigerian mobile networks. Prevention-fi
      * >*Itirations 1 & 2: Tested in incognito on at least 2 devices*
      * >*Itirations 1 & 2: Happy path, Failure path, + delighters*
      * >*Vibe-coding evidence*
-        * [Build Documentation](../../lifeline-build-docs/)
+        * [Build Documentation](../lifeline-build-docs/)
 
 *    **README + architectue** ✅
      * *>Run instructions +t boxes-and-arrows diagram*
