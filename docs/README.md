@@ -19,11 +19,7 @@ A personal-safety check-in app built for Nigerian mobile networks. Prevention-fi
 
 ---
 
-## 🎯 The Problem
-
-Nigerians — especially women, professionals working late, and students — face daily safety friction. There's no fast, low-friction way to tell trusted contacts *"I'm on my way home"* or *"I need help"* without unlocking your phone, finding the right person, and typing. Existing options (WhatsApp share-location, calling a friend) are slow, social, and don't scale to emergencies.
-
-*   **Target User:** Ada Umeh, 20, 300-level Biochemistry, University of Nigeria, Nsukka (UNN). Walks back to her hostel after late library sessions. Has trusted contacts configured (mum + boyfriend).
+##.
 
 ---
 
@@ -31,24 +27,8 @@ Nigerians — especially women, professionals working late, and students — fac
 
 Open the **[Live App](https://github.io)** on a phone, then execute these flows:
 
-1.  **Tap Get Started:** Walk through the onboarding sequence.
-2.  **OTP Code:** Use `8484` (any other code triggers the failure path).
-3.  **Home Screen:** Hold the red **SOS** button for 3 seconds → emergency activates.
-4.  **Start Safe Arrival Card:** Tap **Allow** on the GPS banner → real OpenStreetMap loads with your live location.
-5.  **Bottom Demo Nav:** Jump instantly between preview flows: `🔑 Onboard` · `🏠 Safe Arrival` · `🚨 SOS` · `⚠️ Failures`.
-
-*   **Three failure paths to demo:** wrong OTP code · location permission denied · trip ETA overdue.
-*   **Two delighters:** confetti on safe arrival · shake-to-SOS hint.
-
----
-
-## 🛠️ Tech Highlights
-
-*   **Single-file HTML App (~210 KB):** Highly compact and deployable to any static host environment.
-*   **Real OpenStreetMap via Leaflet:** Embedded completely inline with **zero CDN dependencies**.
-*   **Built for Poor Networks:** Self-hosted mapping libraries, progressive tile loading, and error fallbacks for failed tiles.
-*   **Native Telemetry API Integration:** Uses `navigator.geolocation` for position maps, `navigator.vibrate` for tactile Android SOS feedback, and DeviceMotion API for shake detection.
-*   **No Build Steps:** Vanilla JS execution with zero backend dependencies in the current V1 prototype phase.
+1. arrival · shake-to-SOS hint.
+ with zero backend dependencies in the current V1 prototype phase.
 
 ---
 
@@ -60,65 +40,7 @@ This system model maps how our engineering transition scales into database and c
 graph TD
     %% Base styling definitions
     classDef client fill:#1f242c,stroke:#30363d,stroke-width:2px,color:#c9d1d9;
-    classDef internet fill:#161b22,stroke:#58a6ff,stroke-width:2px,color:#58a6ff;
-    classDef edge fill:#161b22,stroke:#da3633,stroke-width:2px,color:#da3633;
-    classDef data fill:#21262d,stroke:#3fb950,stroke-width:2px,color:#3fb950;
-    classDef offline fill:#2c1f1f,stroke:#ff7b72,stroke-width:1px,color:#ff7b72,stroke-dasharray: 5 5;
-
-    %% Core Components
-    subgraph Frontend [LifeLine Client - ~210KB Engine]
-        App[Single-File Web App]
-        Storage[(Browser localStorage)]
-    end
-    class App,Storage client;
-
-    subgraph ConnectionState [Network Router Logic]
-        GoodNet{Network Signal Strong?}
-        BadNet[Low-Data/No-Signal Mode]
-    end
-    class GoodNet internet;
-    class BadNet offline;
-
-    subgraph Backend [Supabase Cloud Stack]
-        Auth[WhatsApp/SMS Passwordless Auth]
-        Realtime[WebSockets real-time channel]
-        DB[(PostgreSQL Database Layer)]
-        EdgeFunc[Supabase Edge Functions]
-    end
-    class Auth,Realtime internet;
-    class DB data;
-    class EdgeFunc edge;
-
-    subgraph Telephony [External Alert Gateways]
-        SMS[Termii/Twilio API Gateway]
-    end
-    class SMS edge;
-
-    %% Architecture Logic Mapping
-    App --> ConnectionState
-    
-    %% Path A: Optimal Connectivity Flow
-    GoodNet -->|Yes| Auth
-    GoodNet -->|Yes| Realtime
-    Realtime <-->|Live Stream Coordinates| DB
-    
-    %% Path B: Offline-First Failuresafe Sync Flow
-    BadNet -->|No Network| Storage
-    Storage -.->|Incremental HTTP Payload Retry| DB
-
-    %% Automated Edge Alert Layer
-    DB -->|Trigger: ETA Expired OR SOS Active| EdgeFunc
-    EdgeFunc -->|Automated Voice / Text Payload| SMS
-    SMS -->|Direct Telecom Circuit Delivery| TrustedContact[Trusted Circle Handsets]
-    
-    class TrustedContact client;
-```
-
----
-
-## 🧠 Architecture Deep Dive
-
-LifeLine is designed using an **offline-first, prevention-first safety architecture** optimized for **low-bandwidth Nigerian mobile environments**.
+    classDef internet fill:#161b22,stroke:#58a6ff,stroke-** optimized for **low-bandwidth Nigerian mobile environments**.
 
 Unlike traditional emergency systems that activate only during crisis moments, LifeLine prioritizes **daily safe-arrival rituals** to normalize trusted-contact communication before emergencies occur.
 
