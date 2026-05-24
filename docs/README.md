@@ -124,9 +124,10 @@ A personal-safety check-in app built for Nigerian mobile networks. Prevention-fi
                * [weekly-updates](lifeline-weekly-updates.md)
 
 
+           [One of Our Sync Sessions](Weekly_Updates_Screenshot_WhatsAppBusiness.jpg)
 
 
-     *   **📁 09 - Pitch deck (10 slides)** ✅
+   *   **📁 09 - Pitch deck (10 slides)** ✅
           * >*backup demo video on YouTube unlisted*
 
 
