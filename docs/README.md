@@ -12,7 +12,7 @@ A personal-safety check-in app built for Nigerian mobile networks. Prevention-fi
 
 
 *   **📱 01 - One-pager Brief:** ✅
-    *   [PDF](dgdgdgdg) 👉[Download doc here](hdhdhd)
+    *   [PDF](LifeLine_One_Pager_v3_FINAL.pdf) 👉[Download doc here](LifeLine_One_Pager_v3_FINAL.docx)
 
 
 *   **📁 02 - Discovery evidence** ✅
