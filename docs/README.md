@@ -17,7 +17,9 @@ A personal-safety check-in app built for Nigerian mobile networks. Prevention-fi
 
 *   **📁 02 - Discovery evidence** ✅
     * >*synthesised insights + raw notes & screenshots*
-    * [enter folder here](bdbbdvd)
+    * [Our Major Findings](LifeLine_Discovery_Evidence_v2_FINAL.pdf)
+    * >*QUALITative Evidence*
+*  (LifeLine_Qualitative_Interview_Notes_v1_FINAL.pdf)
 
 
 *   **📱 03 - PRD** ✅
