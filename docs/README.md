@@ -74,23 +74,21 @@ A personal-safety check-in app built for Nigerian mobile networks. Prevention-fi
 
 
 
-        * [Demo Video](../VideoCompress_Screen_Recording_20260524_122822_Chrome.mp4)
+        * [Demo Video](../videos/VideoCompress_Screen_Recording_20260524_122822_Chrome.mp4)
 
 
 *    **📁 06 - Metrics & tracking** ✅
      * >*Event plan tied to 2 flows + mock dashboard*
-         *[Metrics](LifeLine_Metrics_and_Tracking_Plan_v2_FINAL.pdf) 
+         * [Metrics](LifeLine_Metrics_and_Tracking_Plan_v2_FINAL.pdf) 
 
 
 
 *    **📁 07 - GTM mini-plan** ✅
-     * >*Positioning onboarding channels rollout.feedback*
+         * >*Positioning onboarding channels rollout.feedback*
 
-       
         * [GTM Mini Plan](LifeLine_Metrics_and_Tracking_Plan_v2_FINAL.pdf)
 
-  
-        * GTM Mini Plan:** [GTM Mini Plan](LifeLine_GTM_Mini_Plan_v1_FINAL.md)
+        * [GTM Mini Plan](LifeLine_GTM_Mini_Plan_v1_FINAL.md)
 
 
 
@@ -147,7 +145,7 @@ A personal-safety check-in app built for Nigerian mobile networks. Prevention-fi
 
    *    **📤 11 - Submission form** ✅
   
-           * [SUBMIT HERE](https://forms.gle/Pn4VWo7LBJWD3tAK6)
+          * [SUBMIT HERE](https://forms.gle/Pn4VWo7LBJWD3tAK6)
 
 
 
