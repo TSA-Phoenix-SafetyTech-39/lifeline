@@ -16,21 +16,27 @@ A personal-safety check-in app built for Nigerian mobile networks. Prevention-fi
 
 
 *   **📁 02 - Discovery evidence** ✅
-    * >*synthesised insights + raw notes & screenshots*
-    * [Our Major Findings](LifeLine_Discovery_Evidence_v2_FINAL.pdf)
+      * >*synthesised insights + raw notes & screenshots*
+
+    * [Full Discovery](LifeLine_Discovery_Evidence_v2_FINAL.pdf)
+
+    * >*[QUANTitative Evidence]
+       * [QUANT-](LifeLine_Survey_Responses.pdf)
+
     * >*QUALITative Evidence*
-*  (LifeLine_Qualitative_Interview_Notes_v1_FINAL.pdf)
+       * [QUALI-](LifeLine_Qualitative_Interview_Notes_v1_FINAL.pdf)
+       
+
 
 
 *   **📱 03 - PRD** ✅
     * >*Stories. AC, prioritisation, NFRs, edge cases*
-    * [bdbbd](bdhdbd)
+    * [PRD](LifeLine_PRD_v3_FINAL.pdf)
 
 
 *    **04 - Design Pack Figma prototype** ✅
      * >*Link -+ design system documentation*
-
-(LifeLine_Product_Design_v2.html)
+        * [Product Design](LifeLine_Product_Design_v2.html)
 
 *    **05 - Build Evidence Working demo URL** ✅
      * >*MVP scope, Architecture (boxes & arrows), Network resilience*
