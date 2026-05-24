@@ -77,6 +77,14 @@ A personal-safety check-in app built for Nigerian mobile networks. Prevention-fi
         * [Demo Video](../videos/VideoCompress_Screen_Recording_20260524_122822_Chrome.mp4)
 
 
+<video src="../videos/VideoCompress_Screen_Recording_20260524_122822_Chrome.mp4" controls width="100%">
+  Your browser does not support the video tag.
+</video>
+
+
+
+
+
 *    **📁 06 - Metrics & tracking** ✅
      * >*Event plan tied to 2 flows + mock dashboard*
          * [Metrics](LifeLine_Metrics_and_Tracking_Plan_v2_FINAL.pdf) 
