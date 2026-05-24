@@ -79,6 +79,9 @@ A personal-safety check-in app built for Nigerian mobile networks. Prevention-fi
 
 
 
+<video src="VideoCompress_Screen_Recording_20260524_122822_Chrome.mp4" width="100%" controls></video>
+
+
 <video src="../videos/VideoCompress_Screen_Recording_20260524_122822_Chrome.mp4" controls width="100%">
   Your browser does not support the video tag.
 </video>
