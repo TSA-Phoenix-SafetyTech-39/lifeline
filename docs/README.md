@@ -15,9 +15,10 @@ A personal-safety check-in app built for Nigerian mobile networks. Prevention-fi
 *   **📱 Decision Log:** [Decision Log](LifeLine_Decision_Log_v2_FINAL.md)
 *   
 *   **📱 GTM Mini Plan:** [GTM Mini Plan](LifeLine_GTM_Mini_Plan_v1_FINAL.md)
-
+**
 *   **📱 GTM Mini Plan:** [GTM Mini Plan](LifeLine_GTM_Mini_Plan_v1_FINAL.md)
-
+*
+*
 *   **📱 GTM Mini Plan:** [GTM Mini Plan](LifeLine_GTM_Mini_Plan_v1_FINAL.md)
 
 
