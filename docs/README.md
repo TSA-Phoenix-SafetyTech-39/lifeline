@@ -31,8 +31,7 @@ A personal-safety check-in app built for Nigerian mobile networks. Prevention-fi
 *   **📁 Design Pack:** [GTM Mini Plan](LifeLine_GTM_Mini_Plan_v1_FINAL.md)
 
 
-*   **📱 The Pitch Deck:**
-* [Our Pitch Deck](LifeLine_Pitch_Deck_v4_FINAL.pdf)👉 [Download Slide Deck here](LifeLine_Pitch_Deck_v4_FINAL.pptx)
+*   **📱 The Pitch Deck:** [Our Pitch Deck](LifeLine_Pitch_Deck_v4_FINAL.pdf)👉 [Download Slide Deck here](LifeLine_Pitch_Deck_v4_FINAL.pptx)
 
 
 
