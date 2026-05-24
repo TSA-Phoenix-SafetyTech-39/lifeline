@@ -28,11 +28,12 @@ A personal-safety check-in app built for Nigerian mobile networks. Prevention-fi
 *    **04 - Design Pack Figma prototype** ✅
      * >*Link -+ design system documentation*
 
+(LifeLine_Product_Design_v2.html)
 
 *    **05 - Build Evidence Working demo URL** ✅
      * >*MVP scope, Architecture (boxes & arrows), Network resilience*
      * >*Data flow, Build & run, Demo ch3at sheet*
-     * >*Manual Test & Tesults, Known Limitations
+     * >*Manual Test & Tesults, Known Limitations+tech debt list*
      * >*Itirations 1 & 2: Tested in incognito on at least 2 devices*
      * >*Itirations 1 & 2: Happy path, Failure path, + delighters*
      * >*Vibe-coding evidence*
