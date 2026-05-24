@@ -10,6 +10,80 @@ A personal-safety check-in app built for Nigerian mobile networks. Prevention-fi
 
 ## 🔗 Other Documents links
 
+
+*   **📱 01 - One-pager Brief:** [PDF](dgdgdgdg) 👉[Download doc here](hdhdhd)
+
+
+*   **📱 Discovery evidence**
+   >*synthesised insights + raw notes & screenshots*
+
+
+PRD
+Stories. AC, prioritisation, NFRs, edge cases
+
+
+
+Figma prototype
+Link -+ design system documentation
+
+
+Working demo URL
+Tested in incognito on at least 2 devices
+
+
+README + architectue
+Run instructions +t boxes-and-arrows diagram
+
+
+
+Test plan + results
+Known limits +tech debt list
+
+
+
+
+Metrics & tracking
+Event plan tied to 2 flows + mock dashboard
+
+
+
+GIM mini-plan
+Positioning onboarding channels rollout.feedback
+
+
+
+Roadmap -+ sprint board +RACI
+Screenshots count as evidence
+
+
+
+Weekly product updates
+4 entries from sprint board history
+
+
+
+lteration/ change log
+At least one before/atfter entry
+
+
+Pitch deck (10 slides)
++ backup demo video on YouTube unlisted
+
+
+Master Folder
+Shared via single public link
+
+
+Submission form
+https://orms.gle/Pn4VWo7LBJWD3tAK6
+
+
+
+
+
+
+
+
 *   **📱 Weekly Updates:** [weekly-updates](lifeline-weekly-updates.md)
 
 
@@ -38,11 +112,40 @@ A personal-safety check-in app built for Nigerian mobile networks. Prevention-fi
 Linked submission checklist (15 items)
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Direct links to every other folder
 
 
 
 "Submitted /" stamp + timestamp
+
+
+
+
+
+
+
 
 
 
