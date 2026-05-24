@@ -65,7 +65,7 @@ A personal-safety check-in app built for Nigerian mobile networks. Prevention-fi
 
 
 
-         *[Build Evidence](LifeLine_Build_Documentation_v3_FINAL.html)
+         * [Build Evidence](LifeLine_Build_Documentation_v3_FINAL.html)
  
   
          * [Build Documentation](../lifeline-build-docs/)
