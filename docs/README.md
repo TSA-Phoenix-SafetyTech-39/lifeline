@@ -113,7 +113,7 @@ A personal-safety check-in app built for Nigerian mobile networks. Prevention-fi
           * 👉[Board.v2](Sprint_Board_v2.PDF) 
         
             
-          * 👉[Board.v3](Sprint_Board_v1.PDF)
+          * 👉[Board.v3](Sprint_Board_v3.PDF)
 
        
         * >*Decision Log:*✅  👉[Decision Log](Decision-Log.pdf)
