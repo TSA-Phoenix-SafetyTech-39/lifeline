@@ -17,7 +17,7 @@
 | Problem statement v1 drafted | PM | ✅ Done |
 | 8 interviewees recruited | Research | ✅ Done |
 | 5 discovery interviews conducted | Research | ✅ Done |
-| Insight synthesis started | Research | ⏳ In Progress |
+| Insight synthesis (first 5 interviews) | Research | ✅ Done |
 
 ### Key decisions made
 
