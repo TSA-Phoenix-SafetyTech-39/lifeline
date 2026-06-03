@@ -218,7 +218,9 @@ A personal-safety check-in app built for Nigerian mobile networks. Prevention-fi
 
 
 # "Submitted" 
-   * >*/ TSA-Phoenix-39-SafetyTech-Community stamp + May 24, 2026 @ 6pm timestamp*
+   * >*Stamped / TSA-Phoenix-39-SafetyTech-Community*
+   * >* >*+*
+   * >*Timestamp / May 24, 2026 @ 6pm*
 
 
 ---
