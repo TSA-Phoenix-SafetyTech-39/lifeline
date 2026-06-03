@@ -218,10 +218,10 @@ A personal-safety check-in app built for Nigerian mobile networks. Prevention-fi
 
 
 # "Submitted" 
-   * >*Stamped / TSA-Phoenix Cohort-Group39-SafetyTech-Community*
+     >*Stamped / TSA-Phoenix Cohort-Group39-SafetyTech-Community*
      
      >*+*
-   * >*Timestamp / May 24, 2026 @ 6pm*
+     >*Timestamp / May 24, 2026 @ 6pm*
 
 
 ---
